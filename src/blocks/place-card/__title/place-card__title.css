@@ -1,0 +1,24 @@
+.place-card__title {
+  margin: 0 0 16px;
+  font-family: RobotoSlab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1A1B22;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .place-card__title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .place-card__title {
+    font-size: 22px;
+    line-height: 26px;
+    margin: 0 0 10px;
+  }
+}

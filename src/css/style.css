@@ -1,0 +1,31 @@
+@import url(../../vendor/fonts.css);
+@import url(../../vendor/normalize.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/search/search.css);
+@import url(../blocks/button/button__exit.css);
+@import url(../blocks/results/results.css);
+@import url(../blocks/places-list/places-list.css);
+@import url(../blocks/place-card/place-card.css);
+@import url(../blocks/author/author.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/footer/footer.css);
+body {
+  margin: 0;
+}
+
+.root {
+  /* background-color: #F5F6F7; */
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: #1A1B22;
+}
+
+.content {
+  min-width: 320px;
+  /*  выше установлена минимальная ширина страницы */
+  max-width: 1440px;
+  /* выше установили ограничение по максимальной ширине */
+  margin: 0 auto;
+  /* выше для экранов больше 1600px отцентрировали весь контент */
+}
+
+@media (min-width: 1440px) {}
