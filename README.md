@@ -1,8 +1,7 @@
 news-explorer-frontend for diplom
-v0.0.2
+v1.0.0
 
-http://iseeknews.space/ https://iseeknews.space/
-https://github.com/alsu-dxdy/news-explorer-frontend
+https://alsu-dxdy.github.io/news-explorer-frontend/
 
 Описание: Cервис, в котором можно найти новости по запросу и сохранить в личном кабинете.
 
@@ -10,3 +9,16 @@ https://github.com/alsu-dxdy/news-explorer-frontend
 
 <li> отправляет запрос к сервису NewsAPI, находит все статьи по запросу за последнюю неделю и отображает карточки с найденными статьями;
 <li> после этого пользователь может сохранять понравившиеся статьи, они будут отображаться в отдельном разделе на сайте.
+
+Используемые языки HTML5, CSS3, JS ES6.
+Сборку выполняет Webpack.
+
+Инструкция по развёртыванию:
+1) Клонировать репозиторий:
+git clone https://github.com/alsu-dxdy/news-explorer-frontend
+2) Выполнить команду:
+npm install
+3) Выполнить команду:
+npm run dev
+4) Enjoy!
+
