@@ -1,4 +1,4 @@
-.place-card__text {
+.article-card__text {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (min-width:768px) and (max-width:1023px) {
-  .place-card__text {
+  .article-card__text {
     font-size: 16px;
     line-height: 22px;
     display: -webkit-box;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (min-width:320px) and (max-width:767px) {
-  .place-card__text {
+  .article-card__text {
     font-size: 16px;
     line-height: 22px;
     display: -webkit-box;

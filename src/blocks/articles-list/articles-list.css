@@ -1,4 +1,4 @@
-.places-list {
+.articles-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);
   /* grid-template-columns: repeat(3, 1fr); */
@@ -11,7 +11,7 @@
 }
 
 @media screen and (min-width:768px) and (max-width:1023px) {
-  .places-list {
+  .articles-list {
     grid-template-columns: repeat(auto-fill, 224px);
     grid-gap: 8px 8px;
     padding: 0 0 40px;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (min-width:320px) and (max-width:767px) {
-  .places-list {
+  .articles-list {
     grid-template-columns: repeat(auto-fill, 288px);
     grid-gap: 8px 8px;
     width: 100%;

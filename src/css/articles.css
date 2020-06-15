@@ -4,8 +4,8 @@
 @import url(../blocks/account-info/account-info.css);
 @import url(../blocks/button/button__exit.css);
 @import url(../blocks/results/results.css);
-@import url(../blocks/places-list/places-list.css);
-@import url(../blocks/place-card/place-card.css);
+@import url(../blocks/articles-list/articles-list.css);
+@import url(../blocks/article-card/article-card.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/footer/footer.css);
 body {
