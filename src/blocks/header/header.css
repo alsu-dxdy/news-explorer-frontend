@@ -140,4 +140,7 @@
   .header__button {
     width: calc(100% - 32px);
   }
+  .header__right-bar.header__right-bar_is-opened {
+    display: flex;
+  }
 }
