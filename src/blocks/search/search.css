@@ -128,6 +128,7 @@
   }
   .search__subtitle {
     margin: 0 0 122px;
+    width: 100%;
   }
   .search__form {
     width: 100%;
