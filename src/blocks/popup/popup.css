@@ -6,7 +6,7 @@
 @import url(./__button/popup__button.css);
 @import url(./__choice/popup__choice.css);
 @import url(./_is-opened/popup_is-opened.css);
-.popup {
+.popup_authorize {
   position: fixed;
   top: 0;
   left: 0;

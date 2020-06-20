@@ -155,17 +155,19 @@
       </section>
 
       <!--popup Вход-->
-      <div class="popup">
+      <div class="popup_authorize">
         <div class="popup__content">
           <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close" />
           <h3 class="popup__title">Вход</h3>
           <form class="popup__form" name="authentication">
             <div class="input-container">
+              <span class="input__name">Email</span>
               <input required type="text" name="email" class="popup__input popup__input_type_email"
                 placeholder="Введите почту" minlength="2" maxlength="30" />
               <span class="input__error"></span>
             </div>
             <div class="input-container">
+              <span class="input__name">Пароль</span>
               <input required type="url" name="password" class="popup__input popup__input_type_password"
                 placeholder="Введите пароль" />
               <span class="input__error"></span>
