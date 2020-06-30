@@ -16,14 +16,16 @@
   <div class="root">
     <main class="content">
       <header class="header ">
-        <button class="header__menu-320"></button>
+        <button class="header__menu-320"></button> <!-- кнопка = -->
         <!-- На 320 после нажатия header__menu-320 меняется на header__close-320 через toggle -->
         <p class="header__logo">NewsExplorer</p>
 
-        <div class="header__right-bar">
-          <a class="header__link" href="./">Главная</a>
-          <a class="header__link header__link_articles" href="./articles.html">Сохранённые статьи</a>
+        <div class="header__menu">
+          <a class="header__menu header__menu-main" href="./">Главная</a>
+          <a class="header__menu header__menu-articles " href="./articles.html">Сохранённые статьи</a>
           <button class="header__button header__button_authorize">Авторизоваться</button>
+          <button class="header__button header__button_name">Грета<img class="button__exit"
+              src="<%=require('../images/exit1440white.svg').default%>" alt="button__exit"></button>
         </div>
       </header>
 
@@ -50,90 +52,6 @@
         <h2 class="results__title">Результаты поиска</h2>
 
         <div class="articles-list root__section">
-
-          <div class="article-card">
-            <div class="article-card__image">
-
-              <button class="article-card__like-icon"></button>
-            </div>
-
-            <div class="article-card__description">
-              <p class="article-card__date">2 августа, 2019</p>
-              <h3 class="article-card__title">Национальное достояние – парки</h3>
-              <p class="article-card__text">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
-                складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться
-                к
-                природе.</p>
-              <p class="article-card__source">Лента.ру</p>
-            </div>
-          </div>
-          <!-- Конец карточки -->
-          <div class="article-card">
-            <div class="article-card__image">
-
-              <button class="article-card__like-icon"></button>
-            </div>
-
-            <div class="article-card__description">
-              <p class="article-card__date">2 августа, 2019</p>
-              <h3 class="article-card__title">Национальное достояние – парки</h3>
-              <p class="article-card__text">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
-                складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться
-                к
-                природе.</p>
-              <p class="article-card__source">Лента.ру</p>
-            </div>
-          </div>
-          <!-- Конец карточки -->
-          <div class="article-card">
-            <div class="article-card__image">
-
-              <button class="article-card__like-icon"></button>
-            </div>
-
-            <div class="article-card__description">
-              <p class="article-card__date">2 августа, 2019</p>
-              <h3 class="article-card__title">Национальное достояние – парки</h3>
-              <p class="article-card__text">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
-                складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться
-                к
-                природе.</p>
-              <p class="article-card__source">Лента.ру</p>
-            </div>
-          </div>
-          <!-- Конец карточки -->
-          <div class="article-card">
-            <div class="article-card__image">
-              <button class="article-card__like-icon"></button>
-            </div>
-
-            <div class="article-card__description">
-              <p class="article-card__date">2 августа, 2019</p>
-              <h3 class="article-card__title">Национальное достояние – парки</h3>
-              <p class="article-card__text">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
-                складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться
-                к
-                природе.</p>
-              <p class="article-card__source">Лента.ру</p>
-            </div>
-          </div>
-          <!-- Конец карточки -->
-          <div class="article-card">
-            <div class="article-card__image">
-              <button class="article-card__like-icon"></button>
-            </div>
-
-            <div class="article-card__description">
-              <p class="article-card__date">2 августа, 2019</p>
-              <h3 class="article-card__title">Национальное достояние – парки</h3>
-              <p class="article-card__text">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
-                складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться
-                к
-                природе.</p>
-              <p class="article-card__source">Лента.ру</p>
-            </div>
-          </div>
-          <!-- Конец карточки -->
         </div>
         <button class="results__button">Показать еще</button>
 
@@ -159,7 +77,7 @@
         <div class="popup__content">
           <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close" />
           <h3 class="popup__title">Вход</h3>
-          <form class="popup__form" name="authentication">
+          <form class="popup__form popup__form_authorize" name="authorize">
             <div class="input-container">
               <span class="input__name">Email</span>
               <input required type="text" name="email" class="popup__input popup__input_type_email"
@@ -168,13 +86,15 @@
             </div>
             <div class="input-container">
               <span class="input__name">Пароль</span>
-              <input required type="url" name="password" class="popup__input popup__input_type_password"
-                placeholder="Введите пароль" />
-              <span class="input__error"></span>
+              <input required type="password" name="password" class="popup__input popup__input_type_password"
+                placeholder="Введите пароль" minlength="8" />
+              <span class=" input__error"></span>
             </div>
+            <p class="popup__error"></p>
             <button class="button popup__button button_disabled">Войти</button>
           </form>
-          <p class="popup__choice">или <a class="popup__transition" href="#">Зарегистрироваться</a></p>
+          <p class="popup__choice">или <a class="popup__link popup__link_registration" href="#">Зарегистрироваться</a>
+          </p>
         </div>
       </div>
 
@@ -183,34 +103,38 @@
         <div class="popup__content">
           <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close" />
           <h3 class="popup__title">Регистрация</h3>
-          <form class="popup__form" name="registration">
+          <form class="popup__form popup__form_registration" name="registration">
             <div class="input-container">
+              <span class="input__name">Email</span>
               <input required type="text" name="email" class="popup__input popup__input_type_email"
                 placeholder="Введите почту" minlength="2" maxlength="30" />
-              <span class="input__error"></span>
+              <span class="input__error">Ошибка с сервера</span>
             </div>
             <div class="input-container">
-              <input required type="url" name="password" class="popup__input popup__input_type_password"
-                placeholder="Введите пароль" />
-              <span class="input__error"></span>
+              <span class="input__name">Пароль</span>
+              <input required type="password" name="password" class="popup__input popup__input_type_password"
+                placeholder="Введите пароль" minlength="8" />
+              <span class=" input__error"></span>
             </div>
             <div class="input-container">
+              <span class="input__name">Имя</span>
               <input required type="text" name="name" class="popup__input popup__input_type_name"
                 placeholder="Введите своё имя" minlength="2" maxlength="30" />
               <span class="input__error"></span>
             </div>
+            <p class="popup__error"></p>
             <button class="button popup__button button_disabled">Зарегистрироваться</button>
           </form>
-          <p class="popup__choice">или <a class="popup__transition" href="#">Зарегистрироваться</a></p>
+          <p class="popup__choice">или <a class="popup__link popup__link_authorize" href="#">Войти</a></p>
         </div>
       </div>
 
       <!--popup Успешная регистрация-->
-      <div class="popup_succes-registration">
-        <div class="popup__content">
+      <div class="popup_success-registration">
+        <div class="popup__content popup__content_success-registration">
           <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close" />
-          <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
-          <a class="popup__transition" href="#">Выполнить вход</a>
+          <h3 class="popup__title popup__title_success-registration">Пользователь успешно зарегистрирован!</h3>
+          <a class="popup__link popup__link_log-in" href="#">Выполнить вход</a>
         </div>
       </div>
 

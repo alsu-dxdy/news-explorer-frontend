@@ -36,8 +36,12 @@ body {
   margin: 0 0 64px;
 }
 
-.header_account {
+.header_font-black {
   color: #1A1B22;
+}
+
+.header__button_black {
+  border: 1px solid #1A1B22;
 }
 
 .header.header_without-img {
@@ -51,8 +55,4 @@ body {
 
 .header__link.header__link_articles a {
   color: #1A1B22;
-}
-
-.header__button.header__button_name {
-  border: 1px solid #1A1B22;
 }

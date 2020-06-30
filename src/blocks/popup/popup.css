@@ -3,6 +3,7 @@
 @import url(./__title/popup__title.css);
 @import url(./__form/popup__form.css);
 @import url(./__input/popup__input.css);
+@import url(./__error/popup__error.css);
 @import url(./__button/popup__button.css);
 @import url(./__choice/popup__choice.css);
 @import url(./_is-opened/popup_is-opened.css);
@@ -40,7 +41,7 @@
   display: none;
 }
 
-.popup_succes-registration {
+.popup_success-registration {
   position: fixed;
   top: 0;
   left: 0;
