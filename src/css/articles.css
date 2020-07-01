@@ -24,16 +24,8 @@ body {
   border-bottom: 0.5px solid rgba(26, 27, 34, 0.5);
 }
 
-.section-title {
-  font-family: RobotoSlab;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 40px;
-  line-height: 46px;
-}
-
-.section-title_results {
-  margin: 0 0 64px;
+.header__button.header__button_name {
+  display: inline-block;
 }
 
 .header_font-black {
@@ -45,14 +37,23 @@ body {
 }
 
 .header.header_without-img {
+  /* скрыть b-image от главной страницы*/
   background-image: none;
   margin-bottom: 40px;
 }
 
-/* .header__logo {
-  color: #1A1B22;
-} */
-
 .header__link.header__link_articles a {
   color: #1A1B22;
+}
+
+.section-title {
+  font-family: RobotoSlab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+.section-title_results {
+  margin: 0 0 64px;
 }

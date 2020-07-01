@@ -24,7 +24,7 @@ export default class Card {
       `,
     );
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.urlToImage})`;
-    articleCard.setAttribute('src', `${item.urlToImage}`);
+    articleCard.setAttribute('src', `${item.url}`);
     return articleCard;
   }
 
@@ -34,7 +34,7 @@ export default class Card {
   //     .classList.add('place-card__delete-icon_visible');
   // }
 
-  // метод like общий для Постановки и снятия лайка
+  // метод like общий для Сохранение и удаления статьи
   like(e) {
     if (e.target.classList.contains('article-card__like-icon')) {
       // клик по сердечку

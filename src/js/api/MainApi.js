@@ -7,13 +7,6 @@ export default class MainApi {
     this.options = options;
   }
 
-  // _getResponseData(res) {
-  //   if (res.ok) {
-  //     res.json();
-  //   }
-  //   // если ошибка, переходим в catch
-  //   return Promise.reject(res);
-  // }
   _getResponseData(res) {
     if (!res.ok) {
       return Promise.resolve(res.json());
@@ -25,7 +18,7 @@ export default class MainApi {
     return fetch(`${this.options.baseUrl}/articles`, {
       method: 'GET',
       headers: {
-        authorization: this.options.headers.authorization
+        authorization: this.options.headers.authorization,
       },
       credentials: 'include',
     })
@@ -78,7 +71,6 @@ export default class MainApi {
       }),
     })
       .then((res) => this._getResponseData(res));
-    // .then((res) => res.json());
   }
 
   signIn(email, password) {
@@ -94,12 +86,27 @@ export default class MainApi {
         password,
       }),
     })
-      // .then((res) => res.json());
-      // .then((res) => res);
       .then((res) => this._getResponseData(res));
   }
 
-  isLogined() {
+  logout() {
+    return fetch(`${this.options.baseUrl}/logout`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this.options.headers.authorization,
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.resolve(res);
+        }
+        return res;
+      });
+  }
+
+  getUserInfo() {
     return fetch(`${this.options.baseUrl}/users/me`, {
       method: 'GET',
       credentials: 'include',
@@ -107,7 +114,7 @@ export default class MainApi {
         authorization: this.options.headers.authorization,
       },
     })
-      // .then(res => this._getResponseData(res));
-      .then((res) => res.json());
+      .then((res) => this._getResponseData(res));
+    // .then((res) => res.json());
   }
 }

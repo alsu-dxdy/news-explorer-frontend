@@ -20,19 +20,16 @@ export default class CardList {
     }
   }
 
-  // renderSaveArticles(array) {
-  //   for (const element of array) {
+  // renderMainPage(newsArticles, savedArticles) {
+  //   for (let i = 0; i < newsArticles.length; i++) {
   //     const newCard = this.card.create(
-  //       element.date,
-  //       element.image,
-  //       element.key,
-  //       element.link,
-  //       element.source,
-  //       element.text,
-  //       element.title,
-  //       element._id,
+  //       newsArticles[i],
   //     );
-  //   this.container.appendChild(newCard);
-  // }
+  //     this.container.appendChild(newCard);
+  //   }
+  // проверяю наличие своего лайка
+  // const isMyLike = newsArticles[i].url.some(function (user) {
+  //   return user._id === userID;
+  // });
   // }
 }
