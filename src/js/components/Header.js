@@ -1,3 +1,4 @@
-class Header {
+// class Header {
 
-}
+// }
+// пока обхожусь функцией headerRender

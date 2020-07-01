@@ -1,8 +1,9 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import Card from './js/components/Card';
-import CardList from './js/components/Cardlist';
+import Article from './js/components/Article';
+import ArticleList from './js/components/ArticleList';
 import MainApi from './js/api/MainApi';
 import NewsApi from './js/api/NewsApi';
 import Popup from './js/components/Popup';
@@ -10,11 +11,7 @@ import FormValidator from './js/components/FormValidator';
 
 import './css/style.css';
 
-// const { mainApi } = require('./js/constants/constants');
-// const { isLoggedIn } = require('./js/constants/constants');
-
-import { PROPS, mainApi } from './js/constants/constants';
-// import * as consta from './js/constants/constants';
+import { PROPS, mainApi, newsApi } from './js/constants/constants';
 
 const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
 
@@ -29,47 +26,17 @@ const popupLinkRegistration = document.querySelector('.popup__link_registration'
 const popupLinkAuthorize = document.querySelector('.popup__link_authorize'); // ссылка Войти
 const popupLinkLogInAfterSuccessReg = document.querySelector('.popup__link_log-in'); // ссылка Выполнить вход
 const articlesList = document.querySelector('.articles-list');
-// let isLoggedIn = false;
-
 
 /* Экземпляры классов */
-const card = new Card();
-const cardList = new CardList(articlesList, card);
+const article = new Article();
+const cardList = new ArticleList(articlesList, article);
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
 const popupSuccessRegistration = new Popup(document.querySelector('.popup_success-registration'));
 
-const newsApi = new NewsApi({
-  baseUrl: 'https://newsapi.org/v2/everything?pageSize=10&apiKey=a3389c152ac04c848350954b53570e25&',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
 /* Экземпляры для валидации (слушатели внутри класса FormValidator) */
 const formVAlidAuthorize = new FormValidator(document.querySelector('.popup_authorize'));
 const formVAlidRegistration = new FormValidator(document.querySelector('.popup_registration'));
-
-// функция для проверки авторизованности юзера
-function checkLogged() {
-  mainApi.getUserInfo()
-    .then((res) => {
-      if (res.message) {
-        console.log(1000);
-        console.log(res);
-        return Promise.reject(res);
-      }
-      console.log(5000);
-      console.log(PROPS);
-      PROPS.isLoggedIn = true;
-      console.log(PROPS.isLoggedIn);
-      headerRender(res.data, PROPS.isLoggedIn);
-    })
-    .catch((err) => {
-      console.log(1001);
-      console.log(err.message);
-    });
-}
 
 
 /* -----Слушатели событий----- */
@@ -116,7 +83,7 @@ searchForm.addEventListener('submit', (event) => {
       // показать секцию Результаты поиска
       document.querySelector('.results')
         .classList.add('results_is-opened');
-      cardList.render(res.articles);
+      cardList.renderMainPage(res.articles, searchForm.word.value);
     })
     .catch((err) => {
       console.log(33);
@@ -198,7 +165,7 @@ articlesList.addEventListener('click', (event) => {
       .postArticle(
         event.target
           .closest('.article-card')
-          .querySelector('.article-card__date').textContent,
+          .getAttribute('keyword'),
         event.target.closest('.article-card').querySelector('.article-card__title').textContent,
         event.target.closest('.article-card').querySelector('.article-card__text').textContent,
         event.target.closest('.article-card').querySelector('.article-card__date').textContent,
@@ -208,7 +175,7 @@ articlesList.addEventListener('click', (event) => {
       )
       .then((data) => {
         console.log(data);
-        card.like(event);
+        article.like(event);
       })
       .catch((err) => {
         console.log(66);
@@ -225,6 +192,27 @@ articlesList.addEventListener('click', (event) => {
       .catch((err) => {
         console.log(`Удаление неуспешно: ${err}`);
       });
-    card.like(event);
+    article.like(event);
   }
 });
+
+// функция для проверки авторизованности юзера
+function checkLogged() {
+  mainApi.getUserInfo()
+    .then((res) => {
+      if (res.message) {
+        console.log(1000);
+        console.log(res);
+        return Promise.reject(res);
+      }
+      console.log(5000);
+      console.log(res);
+      PROPS.isLoggedIn = true;
+      console.log(PROPS.isLoggedIn);
+      headerRender(res.name, PROPS.isLoggedIn);
+    })
+    .catch((err) => {
+      console.log(1001);
+      console.log(err.message);
+    });
+}

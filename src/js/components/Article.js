@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable class-methods-use-this */
-export default class Card {
+export default class Article {
   // create(urlValue, urlToImageValue, publishedAtValue, titleValue,
   //   contentValue, sourceNameValue) {
-  create(item) {
+  create(item, keyword) {
     const articleCard = document.createElement('div');
     articleCard.classList.add('article-card');
     articleCard.insertAdjacentHTML(
@@ -25,6 +25,7 @@ export default class Card {
     );
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.urlToImage})`;
     articleCard.setAttribute('src', `${item.url}`);
+    articleCard.setAttribute('keyword', `${keyword}`);
     return articleCard;
   }
 

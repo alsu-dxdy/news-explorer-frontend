@@ -1,8 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 /* eslint-disable class-methods-use-this */
-import Card from './Card';
+import Article from './Article';
 
-export default class CardSave extends Card {
+export default class ArticleSaved extends Article {
   create(item) {
     const articleCard = document.createElement('div');
     articleCard.classList.add('article-card');
@@ -11,7 +12,7 @@ export default class CardSave extends Card {
       `
       <div class="article-card__image">
         <div class="article-card__left-container">
-          <p class="article-card__keyword">Природа</p>
+          <p class="article-card__keyword">${item.keyword}</p>
         </div>
       <button class="article-card__delete-icon"></button>
       </div>

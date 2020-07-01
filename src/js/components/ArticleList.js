@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
-export default class CardList {
+export default class ArticleList {
   constructor(container, card) {
     this.container = container;
     this.card = card;
@@ -16,6 +16,15 @@ export default class CardList {
         array[i],
       );
 
+      this.container.appendChild(newCard);
+    }
+  }
+
+  renderMainPage(array, keyword) {
+    for (let i = 0; i < array.length; i++) {
+      const newCard = this.card.create(
+        array[i], keyword,
+      );
       this.container.appendChild(newCard);
     }
   }

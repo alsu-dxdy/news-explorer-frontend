@@ -1,33 +1,44 @@
 /* eslint-disable no-undef */
-import CardSave from '../js/components/CardSave';
-import CardList from '../js/components/Cardlist';
+import ArticleSaved from '../js/components/ArticleSaved';
+import ArticleList from '../js/components/ArticleList';
 import { PROPS, mainApi } from '../js/constants/constants';
 
 import '../css/articles.css';
 
-console.log(456);
+const { renderAccountButton, renderAccountCount } = require('../js/utils/headerRender');
+
 const headerButtonName = document.querySelector('.header__button_name');
 
 const articlesList = document.querySelector('.articles-list');
-const savedArticle = new CardSave();
-const savedArticlesList = new CardList(articlesList, savedArticle);
-
+const savedArticle = new ArticleSaved();
+const savedArticlesList = new ArticleList(articlesList, savedArticle);
 
 window.addEventListener('load', () => {
   Promise.all([mainApi.getArticles(), mainApi.getUserInfo()])
     .then(
       ([articles, userData]) => {
-        // показать кнопку с именем
-        headerButtonName.textContent = userData.name;
-        // имя, у вас 5 сохранённых статей
-        document.querySelector('.account-info__title').textContent = `${userData.name}, у вас ${articles.articles.length} сохранённых статей`;
-        // показать секцию Результаты поиска
-        document.querySelector('.results')
-          .classList.add('results_is-opened');
-        savedArticlesList.render(articles.articles);
+        // отрисовка хедера
+        renderAccountButton(userData.name);
+
+        if (articles.articles.length > 0) {
+          // имя, у вас 5 сохранённых статей
+          renderAccountCount(userData.name, articles.articles.length, articles.articles[0].keyword);
+          // показать секцию Результаты поиска
+          document.querySelector('.results')
+            .classList.add('results_is-opened');
+          savedArticlesList.render(articles.articles);
+          // Если articles.articles.length === 2, то передать 2е слово
+        } else {
+          console.log('У вас нет сохраненных статей');
+        }
+        //
       },
-    );
+    )
+    .catch((err) => {
+      console.log(err);
+    });
 });
+
 
 // Удаление карточки
 articlesList.addEventListener('click', (event) => {
