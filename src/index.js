@@ -11,25 +11,17 @@ import FormValidator from './js/components/FormValidator';
 
 import './css/style.css';
 
-import { PROPS, mainApi, newsApi } from './js/constants/constants';
+import {
+  PROPS, mainApi, newsApi, headerButtonAuthorize, headerButtonName,
+  searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
+  popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
+  article, cardList,
+
+} from './js/constants/constants';
 
 const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
 
-const headerButtonAuthorize = document.querySelector('.header__button_authorize');
-const headerButtonName = document.querySelector('.header__button_name');
-
-const searchForm = document.querySelector('.search__form');
-
-const popupFormAuthorize = document.querySelector('.popup__form_authorize');
-const popupFormRegistration = document.querySelector('.popup__form_registration');
-const popupLinkRegistration = document.querySelector('.popup__link_registration'); // ссылка Зарегистрироваться
-const popupLinkAuthorize = document.querySelector('.popup__link_authorize'); // ссылка Войти
-const popupLinkLogInAfterSuccessReg = document.querySelector('.popup__link_log-in'); // ссылка Выполнить вход
-const articlesList = document.querySelector('.articles-list');
-
 /* Экземпляры классов */
-const article = new Article();
-const cardList = new ArticleList(articlesList, article);
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
 const popupSuccessRegistration = new Popup(document.querySelector('.popup_success-registration'));
@@ -38,11 +30,9 @@ const popupSuccessRegistration = new Popup(document.querySelector('.popup_succes
 const formVAlidAuthorize = new FormValidator(document.querySelector('.popup_authorize'));
 const formVAlidRegistration = new FormValidator(document.querySelector('.popup_registration'));
 
-
 /* -----Слушатели событий----- */
 window.addEventListener('load', () => {
-  console.log(PROPS);
-  console.log(PROPS.isLoggedIn);
+  // функция для проверки авторизованности юзера
   checkLogged();
 });
 
@@ -80,7 +70,6 @@ searchForm.addEventListener('submit', (event) => {
       cardList.renderMainPage(res.articles, searchForm.word.value);
     })
     .catch((err) => {
-      console.log(33);
       console.log(err);
     });
 });
@@ -96,11 +85,7 @@ popupFormRegistration.addEventListener('submit', (event) => {
       popupFormRegistration.name.value,
     )
     .then((res) => {
-      console.log(55);
-      console.log(res);
       if (res.message) {
-        console.log(77);
-        console.log(res);
         return Promise.reject(res);
       }
       popupFormRegistration.reset();
@@ -108,8 +93,6 @@ popupFormRegistration.addEventListener('submit', (event) => {
       popupSuccessRegistration.open();
     })
     .catch((err) => {
-      console.log(66);
-      console.log(err);
       popupFormRegistration.querySelector('.popup__error').textContent = err.message;
     });
 });
@@ -123,15 +106,12 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupFormAuthorize.password.value,
     )
     .then((res) => {
-      console.log(res.data);
       PROPS.isLoggedIn = true;
-      console.log(777);
       popupFormAuthorize.reset();
       popupAuthorize.close();
       headerRender(res.data, PROPS.isLoggedIn);
     })
     .catch((err) => {
-      console.log(888);
       console.log(err);
     });
 });
@@ -141,7 +121,6 @@ headerButtonName.addEventListener('click', () => {
   mainApi
     .logout()
     .then((res) => {
-      console.log(res);
       PROPS.isLoggedIn = false;
       headerRenderLogout();
     })
@@ -168,11 +147,9 @@ articlesList.addEventListener('click', (event) => {
         event.target.closest('.article-card').querySelector('.article-card__image').style.backgroundImage.slice(5, -2),
       )
       .then((data) => {
-        console.log(data);
         article.like(event);
       })
       .catch((err) => {
-        console.log(66);
         console.log(err);
       });
     // Если клик по синему флажку:
@@ -195,18 +172,12 @@ function checkLogged() {
   mainApi.getUserInfo()
     .then((res) => {
       if (res.message) {
-        console.log(1000);
-        console.log(res);
         return Promise.reject(res);
       }
-      console.log(5000);
-      console.log(res);
       PROPS.isLoggedIn = true;
-      console.log(PROPS.isLoggedIn);
       headerRender(res.name, PROPS.isLoggedIn);
     })
     .catch((err) => {
-      console.log(1001);
       console.log(err.message);
     });
 }
