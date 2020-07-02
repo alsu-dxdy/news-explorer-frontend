@@ -106,12 +106,17 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupFormAuthorize.password.value,
     )
     .then((res) => {
+      console.log(res);
+      if (res.message) {
+        return Promise.reject(res);
+      }
       PROPS.isLoggedIn = true;
       popupFormAuthorize.reset();
       popupAuthorize.close();
       headerRender(res.data, PROPS.isLoggedIn);
     })
     .catch((err) => {
+      popupFormAuthorize.querySelector('.popup__error').textContent = err.message;
       console.log(err);
     });
 });
