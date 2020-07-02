@@ -37,3 +37,8 @@ export function renderAccountCount(name, count, word) {
   document.querySelector('.account-info__title').textContent = `${name}, у вас ${count} сохранённых статей`;
   document.querySelector('.account-info__keywords_bold').textContent = `${word}`;
 }
+
+export function renderAccountNotArticles(name) {
+  // у вас нет сохранённых статей
+  document.querySelector('.account-info__title').textContent = `${name}, у вас нет сохранённых статей`;
+}
