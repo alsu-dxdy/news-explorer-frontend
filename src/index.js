@@ -74,12 +74,6 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getInitialCards(searchForm.word.value)
     .then((res) => {
-      // if (!res.ok) {
-      //   console.log(11);
-      //   return Promise.reject();
-      // }
-      console.log(22);
-      console.log(res.articles);
       // показать секцию Результаты поиска
       document.querySelector('.results')
         .classList.add('results_is-opened');

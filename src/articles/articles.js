@@ -64,6 +64,7 @@ headerButtonName.addEventListener('click', () => {
     .then((data) => {
       console.log(data);
       PROPS.isLoggedIn = false;
+      window.location.href = './';
     })
     .catch((err) => {
       console.log(err);
