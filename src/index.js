@@ -15,7 +15,7 @@ import {
   PROPS, mainApi, newsApi, headerButtonAuthorize, headerButtonName,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
-  article, cardList,
+  resultsSearching, resultsGot, resultsNothing, article, cardList,
 
 } from './js/constants/constants';
 
@@ -60,13 +60,17 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 // Найти новости
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  resultsSearching.classList.add('results_is-opened');
 
   newsApi
     .getInitialCards(searchForm.word.value)
     .then((res) => {
+      resultsSearching.classList.remove('results_is-opened');
+      if (res.articles.length === 0) {
+        return resultsNothing.classList.add('results_is-opened');
+      }
       // показать секцию Результаты поиска
-      document.querySelector('.results')
-        .classList.add('results_is-opened');
+      resultsGot.classList.add('results_is-opened');
       cardList.renderMainPage(res.articles, searchForm.word.value);
     })
     .catch((err) => {

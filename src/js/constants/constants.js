@@ -33,8 +33,9 @@ const popupLinkRegistration = document.querySelector('.popup__link_registration'
 const popupLinkAuthorize = document.querySelector('.popup__link_authorize'); // ссылка Войти
 const popupLinkLogInAfterSuccessReg = document.querySelector('.popup__link_log-in'); // ссылка Выполнить вход
 const articlesList = document.querySelector('.articles-list');
-
-
+const resultsSearching = document.querySelector('.results__searching');
+const resultsGot = document.querySelector('.results__got');
+const resultsNothing = document.querySelector('.results__nothing');
 /* Экземпляры классов */
 const article = new Article();
 const cardList = new ArticleList(articlesList, article);
@@ -52,6 +53,9 @@ export {
   popupLinkAuthorize,
   popupLinkLogInAfterSuccessReg,
   articlesList,
+  resultsSearching,
+  resultsGot,
+  resultsNothing,
 
   article,
   cardList,
