@@ -61,11 +61,11 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   resultsSearching.classList.add('results_is-opened');
-
   newsApi
     .getInitialCards(searchForm.word.value)
     .then((res) => {
       resultsSearching.classList.remove('results_is-opened');
+      resultsNothing.classList.remove('results_is-opened');
       if (res.articles.length === 0) {
         return resultsNothing.classList.add('results_is-opened');
       }
