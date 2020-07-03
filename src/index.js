@@ -16,8 +16,9 @@ import {
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
   resultsSearching, resultsGot, resultsNothing, article, cardList,
-
+  dateToday, date7daysAgo,
 } from './js/constants/constants';
+// console.log(date7daysAgo);
 
 const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
 
@@ -62,7 +63,7 @@ searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   resultsSearching.classList.add('results_is-opened');
   newsApi
-    .getInitialCards(searchForm.word.value)
+    .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
       resultsSearching.classList.remove('results_is-opened');
       resultsNothing.classList.remove('results_is-opened');
@@ -72,6 +73,7 @@ searchForm.addEventListener('submit', (event) => {
       // показать секцию Результаты поиска
       resultsGot.classList.add('results_is-opened');
       cardList.renderMainPage(res.articles, searchForm.word.value);
+      // document.querySelectorAll('.article-card__like-icon:hover:after').style.display = 'none';
     })
     .catch((err) => {
       console.log(err);
