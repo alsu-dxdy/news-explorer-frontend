@@ -19,6 +19,9 @@ export default class Article {
       `
       <div class="article-card__image-container">
         <div class="article-card__image">
+        <div class="article-card__hint-container">
+            <p class="article-card__hint-text">Войдите, чтобы сохранять статьи</p>
+        </div>
         <button class="article-card__like-icon"></button>
         </div>
 

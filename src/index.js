@@ -19,7 +19,6 @@ import {
   resultsSearching, resultsGot, resultsNothing, resultsButton, article, cardList,
   dateToday, date7daysAgo,
 } from './js/constants/constants';
-// console.log(date7daysAgo);
 
 const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
 
@@ -37,8 +36,6 @@ window.addEventListener('load', () => {
   // функция для проверки авторизованности юзера
   checkLogged();
 });
-
-// Кнопка Показать еще
 
 
 // Открытие popup Регистрация
@@ -66,6 +63,7 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   resultsSearching.classList.add('results_is-opened');
+  articlesList.textContent = '';
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
@@ -100,7 +98,7 @@ searchForm.addEventListener('submit', (event) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.message);
     });
 });
 
@@ -159,7 +157,7 @@ headerButtonName.addEventListener('click', () => {
       headerRenderLogout();
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.message);
     });
 });
 
@@ -184,7 +182,7 @@ articlesList.addEventListener('click', (event) => {
         article.like(event);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.message);
       });
     // Если клик по синему флажку:
   } else if (event.target.classList.contains('article-card__delete-icon')) {
@@ -196,11 +194,33 @@ articlesList.addEventListener('click', (event) => {
       })
       .catch((err) => {
         console.log(`Удаление неуспешно: ${err}`);
+        alert(err.message);
       });
     article.like(event);
   }
 });
 
+// Всплывающая подсказка Войдите, чтобы сохранять статьи
+articlesList.addEventListener('mouseover', (event) => {
+  if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
+    console.log(777);
+    event.target.closest('.article-card')
+      .querySelector('.article-card__hint-container')
+      .classList
+      .add('article-card__hint-container_is-opened');
+  }
+});
+
+// Всплывающая подсказка Войдите, чтобы сохранять статьи
+articlesList.addEventListener('mouseout', (event) => {
+  if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
+    console.log(888);
+    event.target.closest('.article-card')
+      .querySelector('.article-card__hint-container')
+      .classList
+      .remove('article-card__hint-container_is-opened');
+  }
+});
 // функция для проверки авторизованности юзера
 function checkLogged() {
   mainApi.getUserInfo()
@@ -213,5 +233,6 @@ function checkLogged() {
     })
     .catch((err) => {
       console.log(err.message);
+      // alert(err.message);
     });
 }

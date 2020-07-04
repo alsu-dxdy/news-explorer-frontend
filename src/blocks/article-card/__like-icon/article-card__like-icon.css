@@ -20,9 +20,10 @@
   background-image: url(../../../images/bookmark-hover.png);
 }
 
-.article-card__like-icon:hover:after {
+.article-card__hint-container {
   content: "Войдите, чтобы сохранять статьи";
   width: 182px;
+  height: 40px;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -33,16 +34,33 @@
   background: #fff;
   box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
   border-radius: 10px;
-  padding: 16px 0 16px;
+  /* padding: 16px 0 16px; */
   position: absolute;
-  top: 0px;
-  left: -187px;
+  top: 24px;
+  left: 149px;
   cursor: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.article-card__hint-container.article-card__hint-container_is-opened {
+  display: flex;
+}
+
+.article-card__hint-text {
+  text-align: center;
 }
 
 @media screen and (min-width:768px) and (max-width:1023px) {
   .article-card__like-icon {
     top: 8px;
     right: 8px;
+  }
+  .article-card__hint-container {
+    width: 101px;
+    top: 8px;
+    left: 63px;
   }
 }

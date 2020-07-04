@@ -18,9 +18,10 @@ const mainApi = new MainApi({
 });
 
 const newsApi = new NewsApi({
-  baseUrl: 'https://newsapi.org/v2/everything?'
+  // baseUrl: 'https://newsapi.org/v2/everything?'
+  baseUrl: 'https://praktikum.tk/news/v2/everything?'
     + 'apiKey=a3389c152ac04c848350954b53570e25&'
-    + 'pageSize=11&',
+    + 'pageSize=10&',
   headers: {
     'Content-Type': 'application/json',
   },
