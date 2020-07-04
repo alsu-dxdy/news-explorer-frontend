@@ -82,6 +82,11 @@
   color: #1A1B22;
   border-style: none;
   cursor: pointer;
+  display: none;
+}
+
+.results__button.results__button_is-visible {
+  display: block;
 }
 
 .results.results_saved-articles {

@@ -1,9 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 export default class ArticleList {
-  constructor(container, card) {
+  constructor(container, card, button) {
     this.container = container;
     this.article = card;
+    this.button = button;
   }
 
   addCard(cardElement) {

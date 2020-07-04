@@ -88,8 +88,9 @@
           <form class="popup__form popup__form_authorize" name="authorize">
             <div class="input-container">
               <span class="input__name">Email</span>
-              <input required type="text" name="email" class="popup__input popup__input_type_email"
-                placeholder="Введите почту" minlength="2" maxlength="30" />
+              <input required type="email" name="email" class="popup__input popup__input_type_email"
+                placeholder="Введите почту" minlength="2" maxlength="30"
+                pattern="^[a-z]+[-.\w]*@(\w+[\w-]+)+(\.[a-z]{2,3})$" />
               <span class="input__error"></span>
             </div>
             <div class="input-container">
@@ -114,8 +115,9 @@
           <form class="popup__form popup__form_registration" name="registration">
             <div class="input-container">
               <span class="input__name">Email</span>
-              <input required type="text" name="email" class="popup__input popup__input_type_email"
-                placeholder="Введите почту" minlength="2" maxlength="30" />
+              <input required type="email" name="email" class="popup__input popup__input_type_email"
+                placeholder="Введите почту" minlength="2" maxlength="30"
+                pattern="^[a-z]+[-.\w]*@(\w+[\w-]+)+(\.[a-z]{2,3})$" />
               <span class="input__error"></span>
             </div>
             <div class="input-container">

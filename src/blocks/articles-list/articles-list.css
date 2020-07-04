@@ -4,7 +4,7 @@
   /* grid-template-columns: repeat(3, 1fr); */
   grid-gap: 16px 16px;
   justify-content: center;
-  padding-bottom: 64px;
+  padding: 0 104px 64px;
   background: #F5F6F7;
   /* padding: 64px 104px; */
   /* margin: 80px 104px; */
@@ -14,7 +14,7 @@
   .articles-list {
     grid-template-columns: repeat(auto-fill, 224px);
     grid-gap: 8px 8px;
-    padding: 0 0 40px;
+    padding: 0 40px 40px;
   }
 }
 

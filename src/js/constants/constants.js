@@ -20,7 +20,7 @@ const mainApi = new MainApi({
 const newsApi = new NewsApi({
   baseUrl: 'https://newsapi.org/v2/everything?'
     + 'apiKey=a3389c152ac04c848350954b53570e25&'
-    + 'pageSize=50&',
+    + 'pageSize=11&',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -38,9 +38,10 @@ const articlesList = document.querySelector('.articles-list');
 const resultsSearching = document.querySelector('.results__searching');
 const resultsGot = document.querySelector('.results__got');
 const resultsNothing = document.querySelector('.results__nothing');
+const resultsButton = document.querySelector('.results__button');
 /* Экземпляры классов */
 const article = new Article();
-const cardList = new ArticleList(articlesList, article);
+const cardList = new ArticleList(articlesList, article, resultsButton);
 
 // Форматировние даты для запросов к newsapi
 const start = Date.now(); // сегодня в мс
@@ -78,6 +79,7 @@ export {
   resultsSearching,
   resultsGot,
   resultsNothing,
+  resultsButton,
 
   article,
   cardList,

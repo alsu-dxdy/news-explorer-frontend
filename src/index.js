@@ -1,7 +1,8 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable consistent-return */
 import Article from './js/components/Article';
 import ArticleList from './js/components/ArticleList';
 import MainApi from './js/api/MainApi';
@@ -15,7 +16,7 @@ import {
   PROPS, mainApi, newsApi, headerButtonAuthorize, headerButtonName,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
-  resultsSearching, resultsGot, resultsNothing, article, cardList,
+  resultsSearching, resultsGot, resultsNothing, resultsButton, article, cardList,
   dateToday, date7daysAgo,
 } from './js/constants/constants';
 // console.log(date7daysAgo);
@@ -36,6 +37,9 @@ window.addEventListener('load', () => {
   // функция для проверки авторизованности юзера
   checkLogged();
 });
+
+// Кнопка Показать еще
+
 
 // Открытие popup Регистрация
 popupLinkRegistration.addEventListener('click', () => {
@@ -65,21 +69,40 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
+      console.log(`Всего нашлось ${res.articles.length} статей`);
+      // Удалить прелоудер и Ничего не найдено
       resultsSearching.classList.remove('results_is-opened');
       resultsNothing.classList.remove('results_is-opened');
+      // Если ничего не нашлось, то отобразить Ничего не найдено
       if (res.articles.length === 0) {
         return resultsNothing.classList.add('results_is-opened');
       }
       // показать секцию Результаты поиска
       resultsGot.classList.add('results_is-opened');
-      cardList.renderMainPage(res.articles, searchForm.word.value);
-      // document.querySelectorAll('.article-card__like-icon:hover:after').style.display = 'none';
+      // отобразить первые 3 элемента
+      cardList.renderMainPage(res.articles.slice(0, 3), searchForm.word.value);
+      // удалить выведенные элементы:
+      res.articles.splice(0, 3);
+      // если есть еще статьи, то отобразить кнопку
+      if (res.articles.length > 0) {
+        resultsButton.classList.add('results__button_is-visible');
+      }
+
+      // слушаем...
+      resultsButton.addEventListener('click', () => {
+        // сформировать массив из следующих 3х статей
+        const threeArticles = res.articles.slice(0, 3);
+        cardList.renderMainPage(threeArticles);
+        if (res.articles.length < 3) {
+          resultsButton.classList.remove('results__button_is-visible');
+        }
+        res.articles.splice(0, 3);
+      });
     })
     .catch((err) => {
       console.log(err);
     });
 });
-
 
 // Регистрация
 popupFormRegistration.addEventListener('submit', (event) => {

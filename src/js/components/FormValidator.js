@@ -5,7 +5,7 @@ export default class FormValidator {
     this.form.addEventListener('input', this.setEventListeners.bind(this));
   }
 
-  // checkInputValidity —  валидация поля.
+  // checkInputValidity —  валидация поля.вернет значение true, если проблем не обнаружит
   checkInputValidity(input, error) {
 
     if (input.validity.valueMissing) {
@@ -21,7 +21,7 @@ export default class FormValidator {
     }
 
     if (input.validity.typeMismatch) {
-      return (error.textContent = 'Здесь должна быть ссылка');
+      return (error.textContent = 'Введите корректный email');
     }
 
     error.textContent = '';
@@ -50,6 +50,6 @@ export default class FormValidator {
   }
 
   setError(err) {
-    this.form.querySelector('.popup__error').textContent = err;
+    this.form.querySelector('.input__error').textContent = err;
   }
 }
