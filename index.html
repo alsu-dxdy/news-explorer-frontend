@@ -9,7 +9,7 @@
   <title>Сервис для поиска новостей</title>
   <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
     href="./images/favicon-N-16x16.png">
-  <link rel="stylesheet" href="style/main.4abf644d44be662298e1.css">
+  <link rel="stylesheet" href="style/main.3a89874ad952400ebb6b.css">
 </head>
 
 <body>
@@ -88,8 +88,9 @@
           <form class="popup__form popup__form_authorize" name="authorize">
             <div class="input-container">
               <span class="input__name">Email</span>
-              <input required type="text" name="email" class="popup__input popup__input_type_email"
-                placeholder="Введите почту" minlength="2" maxlength="30" />
+              <input required type="email" name="email" class="popup__input popup__input_type_email"
+                placeholder="Введите почту" minlength="2" maxlength="30"
+                pattern="^[a-z]+[-.\w]*@(\w+[\w-]+)+(\.[a-z]{2,3})$" />
               <span class="input__error"></span>
             </div>
             <div class="input-container">
@@ -114,8 +115,9 @@
           <form class="popup__form popup__form_registration" name="registration">
             <div class="input-container">
               <span class="input__name">Email</span>
-              <input required type="text" name="email" class="popup__input popup__input_type_email"
-                placeholder="Введите почту" minlength="2" maxlength="30" />
+              <input required type="email" name="email" class="popup__input popup__input_type_email"
+                placeholder="Введите почту" minlength="2" maxlength="30"
+                pattern="^[a-z]+[-.\w]*@(\w+[\w-]+)+(\.[a-z]{2,3})$" />
               <span class="input__error"></span>
             </div>
             <div class="input-container">
@@ -169,7 +171,7 @@
     </main>
 
   </div>
-  <script type="module" src="./js/main.d08194d41a309ab81af0.js"></script>
+  <script type="module" src="./js/main.88abf8710cf821ea9ec8.js"></script>
 </body>
 
 </html>
