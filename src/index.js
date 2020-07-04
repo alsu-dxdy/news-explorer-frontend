@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-shadow */
@@ -60,6 +61,7 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 });
 
 // Найти новости
+let articles = [];
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   resultsSearching.classList.add('results_is-opened');
@@ -67,7 +69,6 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
-      console.log(`Всего нашлось ${res.articles.length} статей`);
       // Удалить прелоудер и Ничего не найдено
       resultsSearching.classList.remove('results_is-opened');
       resultsNothing.classList.remove('results_is-opened');
@@ -85,21 +86,26 @@ searchForm.addEventListener('submit', (event) => {
       if (res.articles.length > 0) {
         resultsButton.classList.add('results__button_is-visible');
       }
-
-      // слушаем...
-      resultsButton.addEventListener('click', () => {
-        // сформировать массив из следующих 3х статей
-        const threeArticles = res.articles.slice(0, 3);
-        cardList.renderMainPage(threeArticles);
-        if (res.articles.length < 3) {
-          resultsButton.classList.remove('results__button_is-visible');
-        }
-        res.articles.splice(0, 3);
-      });
+      // сохраняю оставшийся массив в переменной
+      return articles = res.articles.slice(0);
     })
     .catch((err) => {
       alert(err.message);
     });
+});
+
+// слушаем... Кнопка Показать еще
+resultsButton.addEventListener('click', () => {
+  let threeArticles = '';
+  // отрисовать массив из следующих 3х статей
+  threeArticles = articles.slice(0, 3);
+  cardList.renderMainPage(threeArticles, searchForm.word.value);
+  if (articles.length <= 3) {
+    resultsButton.classList.remove('results__button_is-visible');
+    return;
+  }
+  // отрезаем, что отрисовали и возвращаем обновленный массив
+  return articles.splice(0, 3);
 });
 
 // Регистрация
@@ -203,7 +209,6 @@ articlesList.addEventListener('click', (event) => {
 // Всплывающая подсказка Войдите, чтобы сохранять статьи
 articlesList.addEventListener('mouseover', (event) => {
   if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
-    console.log(777);
     event.target.closest('.article-card')
       .querySelector('.article-card__hint-container')
       .classList
@@ -211,10 +216,9 @@ articlesList.addEventListener('mouseover', (event) => {
   }
 });
 
-// Всплывающая подсказка Войдите, чтобы сохранять статьи
+// Убрать Всплывающую подсказку Войдите, чтобы сохранять статьи
 articlesList.addEventListener('mouseout', (event) => {
   if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
-    console.log(888);
     event.target.closest('.article-card')
       .querySelector('.article-card__hint-container')
       .classList
