@@ -14,7 +14,7 @@ export default class Article {
     const rusDate = this._changetoRus(item.publishedAt);
     const articleCard = document.createElement('div');
     articleCard.classList.add('article-card');
-    // верхняя часть карточки
+    // imageElement
     const imageElement = document.createElement('div');
     const hintContainerElement = document.createElement('div');
     const hintTextElement = document.createElement('p');
@@ -24,7 +24,7 @@ export default class Article {
     imageElement.appendChild(hintContainerElement);
     imageElement.appendChild(likeButtonElement);
 
-    // нижняя часть карточки
+    // descriptionElement
     const descriptionElement = document.createElement('div');
     const dateElement = document.createElement('p');
     const titleElement = document.createElement('p');
