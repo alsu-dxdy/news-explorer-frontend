@@ -21,7 +21,7 @@
 }
 
 .article-card__hint-container {
-  content: "Войдите, чтобы сохранять статьи";
+  /* content: "Войдите, чтобы сохранять статьи"; */
   width: 182px;
   height: 40px;
   font-family: Roboto, Arial, Helvetica, sans-serif;
