@@ -23,6 +23,9 @@ import {
 
 const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
 
+const headerMenu320 = document.querySelector('.header__button-320');
+const headerClose320 = document.querySelector('.header__close-320');
+
 /* Экземпляры классов */
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
@@ -38,6 +41,29 @@ window.addEventListener('load', () => {
   checkLogged();
 });
 
+headerMenu320.addEventListener('click', () => {
+  console.log(77);
+  // document.querySelector('.header').style.background = '#1A1B22';
+  // headerMenu320.style.background = 'none';
+  document.querySelector('.header').classList.toggle('header_black-background');
+  headerMenu320.classList.add('header__menu_invisible');
+  headerClose320.classList.add('header__menu_visible');
+  document.querySelector('.header__menu-main')
+    .classList.add('header__menu_visible');
+  document.querySelector('.header__button_authorize')
+    .classList.add('header__menu_visible');
+});
+
+headerClose320.addEventListener('click', () => {
+  console.log(headerClose320);
+  // document.querySelector('.header').style.backgroundImage = './images/search-320.png';
+  document.querySelector('.header').classList.toggle('header_black-background');
+  document.querySelector('.header__menu-main').classList.remove('header__menu_visible');
+  document.querySelector('.header__button_authorize')
+    .classList.remove('header__menu_visible');
+  headerMenu320.classList.remove('header__menu_invisible');
+  headerClose320.classList.remove('header__menu_visible');
+});
 
 // Открытие popup Регистрация
 popupLinkRegistration.addEventListener('click', () => {
