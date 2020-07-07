@@ -31,50 +31,31 @@ export default class Article {
     const rusDate = this._changetoRus(item.publishedAt);
     const articleCard = document.createElement('div');
     articleCard.classList.add('article-card');
-    // imageElement
-    const imageElement = document.createElement('div');
-    const hintContainerElement = document.createElement('div');
-    const hintTextElement = document.createElement('p');
-    const likeButtonElement = document.createElement('button');
 
-    hintContainerElement.appendChild(hintTextElement);
-    imageElement.appendChild(hintContainerElement);
-    imageElement.appendChild(likeButtonElement);
-
-    // descriptionElement
-    const descriptionElement = document.createElement('div');
-    const dateElement = document.createElement('p');
-    const titleElement = document.createElement('p');
-    const textElement = document.createElement('p');
-    const sourceElement = document.createElement('p');
-
-    descriptionElement.appendChild(dateElement);
-    descriptionElement.appendChild(titleElement);
-    descriptionElement.appendChild(textElement);
-    descriptionElement.appendChild(sourceElement);
-
-    // соединение 2х частей в целую карточку
-    articleCard.appendChild(imageElement);
-    articleCard.appendChild(descriptionElement);
-
-    // классы
-    imageElement.classList.add('article-card__image');
-    hintContainerElement.classList.add('article-card__hint-container');
-    hintTextElement.classList.add('article-card__hint-text');
-    likeButtonElement.classList.add('article-card__like-icon');
-
-    descriptionElement.classList.add('article-card__description');
-    dateElement.classList.add('article-card__date');
-    titleElement.classList.add('article-card__title');
-    textElement.classList.add('article-card__text');
-    sourceElement.classList.add('article-card__source');
-
+    articleCard.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="article-card__image-container">
+          <div class="article-card__image">
+          <div class="article-card__hint-container">
+              <p class="article-card__hint-text">Войдите, чтобы сохранять статьи</p>
+          </div>
+          <button class="article-card__like-icon"></button>
+          </div>
+        <div class="article-card__description">
+          <p class="article-card__date"></p>
+      <h3 class="article-card__title"></h3>
+      <p class="article-card__text"></p>
+      <p class="article-card__source"></p>
+        </div >
+      </div >
+        `,
+    );
     // textContent-ы
-    dateElement.textContent = `${rusDate}`;
-    titleElement.textContent = `${item.description}`;
-    textElement.textContent = `${item.content}`;
-    sourceElement.textContent = `${item.source.name}`;
-    hintContainerElement.textContent = 'Войдите, чтобы сохранять статьи';
+    articleCard.querySelector('.article-card__date').textContent = `${rusDate}`;
+    articleCard.querySelector('.article-card__title').textContent = `${item.description}`;
+    articleCard.querySelector('.article-card__text').textContent = `${item.content}`;
+    articleCard.querySelector('.article-card__source').textContent = `${item.source.name}`;
 
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.urlToImage})`;
     articleCard.setAttribute('src', `${item.url}`);
@@ -82,11 +63,6 @@ export default class Article {
     return articleCard;
   }
 
-  // addBasketSymbol(element) {
-  //   element
-  //     .querySelector('.place-card__delete-icon')
-  //     .classList.add('place-card__delete-icon_visible');
-  // }
 
   // метод like общий для Сохранение и удаления статьи
   like(e) {
