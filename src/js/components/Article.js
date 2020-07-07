@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable lines-between-class-members */
 /* eslint-disable no-underscore-dangle */
@@ -9,6 +10,22 @@ export default class Article {
     const arr = 'января,февраля,марта,апреля,мая,июня,июля,августа,сентября,октября,ноября,декабря'.split(',');
     const articleDate = `${a.getDate()} ${arr[a.getMonth()]}, ${a.getFullYear()}`;
     return articleDate;
+  }
+
+  getTextContentArticle(event) {
+    // Если клик по бесцветному флажку:
+    if (event.target.classList.contains('article-card__like-icon')) {
+      const article = event.target.closest('.article-card');
+      return {
+        keyword: article.getAttribute('keyword'),
+        title: article.querySelector('.article-card__title').textContent,
+        text: article.querySelector('.article-card__text').textContent,
+        date: article.querySelector('.article-card__date').textContent,
+        source: article.querySelector('.article-card__source').textContent,
+        link: article.getAttribute('src'),
+        image: article.querySelector('.article-card__image').style.backgroundImage.slice(5, -2),
+      };
+    }
   }
   create(item, keyword) {
     const rusDate = this._changetoRus(item.publishedAt);

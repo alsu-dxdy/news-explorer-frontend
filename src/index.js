@@ -197,19 +197,9 @@ headerButtonName.addEventListener('click', () => {
 articlesList.addEventListener('click', (event) => {
   // Если клик по бесцветному флажку:
   if (event.target.classList.contains('article-card__like-icon')) {
-    // const cardId = event.target.closest('.place-card').getAttribute('cardID');
+    const articleData = article.getTextContentArticle(event);
     mainApi
-      .postArticle(
-        event.target
-          .closest('.article-card')
-          .getAttribute('keyword'),
-        event.target.closest('.article-card').querySelector('.article-card__title').textContent,
-        event.target.closest('.article-card').querySelector('.article-card__text').textContent,
-        event.target.closest('.article-card').querySelector('.article-card__date').textContent,
-        event.target.closest('.article-card').querySelector('.article-card__source').textContent,
-        event.target.closest('.article-card').getAttribute('src'),
-        event.target.closest('.article-card').querySelector('.article-card__image').style.backgroundImage.slice(5, -2),
-      )
+      .postArticle(articleData)
       .then((data) => {
         article.like(event);
       })
