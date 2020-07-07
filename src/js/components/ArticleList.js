@@ -1,9 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 export default class ArticleList {
-  constructor(container, card) {
+  constructor(container, card, button) {
     this.container = container;
-    this.card = card;
+    this.article = card;
+    this.button = button;
   }
 
   addCard(cardElement) {
@@ -12,7 +13,7 @@ export default class ArticleList {
 
   render(array) {
     for (let i = 0; i < array.length; i++) {
-      const newCard = this.card.create(
+      const newCard = this.article.create(
         array[i],
       );
 
@@ -22,7 +23,7 @@ export default class ArticleList {
 
   renderMainPage(array, keyword) {
     for (let i = 0; i < array.length; i++) {
-      const newCard = this.card.create(
+      const newCard = this.article.create(
         array[i], keyword,
       );
       this.container.appendChild(newCard);

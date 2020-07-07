@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-undef */
 import ArticleSaved from '../js/components/ArticleSaved';
 import ArticleList from '../js/components/ArticleList';
@@ -5,7 +6,7 @@ import { PROPS, mainApi } from '../js/constants/constants';
 
 import '../css/articles.css';
 
-const { renderAccountButton, renderAccountCount } = require('../js/utils/headerRender');
+const { renderAccountButton, renderAccountCount, renderAccountNotArticles } = require('../js/utils/headerRender');
 
 const headerButtonName = document.querySelector('.header__button_name');
 
@@ -19,7 +20,9 @@ window.addEventListener('load', () => {
       ([articles, userData]) => {
         // отрисовка хедера
         renderAccountButton(userData.name);
-
+        if (articles.message) {
+          return renderAccountNotArticles(userData.name);
+        }
         if (articles.articles.length > 0) {
           // имя, у вас 5 сохранённых статей
           renderAccountCount(userData.name, articles.articles.length, articles.articles[0].keyword);
@@ -27,11 +30,8 @@ window.addEventListener('load', () => {
           document.querySelector('.results')
             .classList.add('results_is-opened');
           savedArticlesList.render(articles.articles);
-          // Если articles.articles.length === 2, то передать 2е слово
-        } else {
-          console.log('У вас нет сохраненных статей');
         }
-        //
+        // Если articles.articles.length === 2, то передать 2е слово
       },
     )
     .catch((err) => {

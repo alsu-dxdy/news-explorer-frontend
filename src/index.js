@@ -1,7 +1,9 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable consistent-return */
 import Article from './js/components/Article';
 import ArticleList from './js/components/ArticleList';
 import MainApi from './js/api/MainApi';
@@ -11,25 +13,20 @@ import FormValidator from './js/components/FormValidator';
 
 import './css/style.css';
 
-import { PROPS, mainApi, newsApi } from './js/constants/constants';
+import {
+  PROPS, mainApi, newsApi, headerButtonAuthorize, headerButtonName,
+  searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
+  popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
+  resultsSearching, resultsGot, resultsNothing, resultsButton, article, cardList,
+  dateToday, date7daysAgo,
+} from './js/constants/constants';
 
 const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
 
-const headerButtonAuthorize = document.querySelector('.header__button_authorize');
-const headerButtonName = document.querySelector('.header__button_name');
-
-const searchForm = document.querySelector('.search__form');
-
-const popupFormAuthorize = document.querySelector('.popup__form_authorize');
-const popupFormRegistration = document.querySelector('.popup__form_registration');
-const popupLinkRegistration = document.querySelector('.popup__link_registration'); // ссылка Зарегистрироваться
-const popupLinkAuthorize = document.querySelector('.popup__link_authorize'); // ссылка Войти
-const popupLinkLogInAfterSuccessReg = document.querySelector('.popup__link_log-in'); // ссылка Выполнить вход
-const articlesList = document.querySelector('.articles-list');
+const headerMenu320 = document.querySelector('.header__button-320');
+const headerClose320 = document.querySelector('.header__close-320');
 
 /* Экземпляры классов */
-const article = new Article();
-const cardList = new ArticleList(articlesList, article);
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
 const popupSuccessRegistration = new Popup(document.querySelector('.popup_success-registration'));
@@ -38,12 +35,34 @@ const popupSuccessRegistration = new Popup(document.querySelector('.popup_succes
 const formVAlidAuthorize = new FormValidator(document.querySelector('.popup_authorize'));
 const formVAlidRegistration = new FormValidator(document.querySelector('.popup_registration'));
 
-
 /* -----Слушатели событий----- */
 window.addEventListener('load', () => {
-  console.log(PROPS);
-  console.log(PROPS.isLoggedIn);
+  // функция для проверки авторизованности юзера
   checkLogged();
+});
+
+headerMenu320.addEventListener('click', () => {
+  console.log(77);
+  // document.querySelector('.header').style.background = '#1A1B22';
+  // headerMenu320.style.background = 'none';
+  document.querySelector('.header').classList.toggle('header_black-background');
+  headerMenu320.classList.add('header__menu_invisible');
+  headerClose320.classList.add('header__menu_visible');
+  document.querySelector('.header__menu-main')
+    .classList.add('header__menu_visible');
+  document.querySelector('.header__button_authorize')
+    .classList.add('header__menu_visible');
+});
+
+headerClose320.addEventListener('click', () => {
+  console.log(headerClose320);
+  // document.querySelector('.header').style.backgroundImage = './images/search-320.png';
+  document.querySelector('.header').classList.toggle('header_black-background');
+  document.querySelector('.header__menu-main').classList.remove('header__menu_visible');
+  document.querySelector('.header__button_authorize')
+    .classList.remove('header__menu_visible');
+  headerMenu320.classList.remove('header__menu_invisible');
+  headerClose320.classList.remove('header__menu_visible');
 });
 
 // Открытие popup Регистрация
@@ -68,23 +87,52 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 });
 
 // Найти новости
+let articles = [];
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
-
+  resultsSearching.classList.add('results_is-opened');
+  articlesList.textContent = '';
   newsApi
-    .getInitialCards(searchForm.word.value)
+    .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
+      // Удалить прелоудер и Ничего не найдено
+      resultsSearching.classList.remove('results_is-opened');
+      resultsNothing.classList.remove('results_is-opened');
+      // Если ничего не нашлось, то отобразить Ничего не найдено
+      if (res.articles.length === 0) {
+        return resultsNothing.classList.add('results_is-opened');
+      }
       // показать секцию Результаты поиска
-      document.querySelector('.results')
-        .classList.add('results_is-opened');
-      cardList.renderMainPage(res.articles, searchForm.word.value);
+      resultsGot.classList.add('results_is-opened');
+      // отобразить первые 3 элемента
+      cardList.renderMainPage(res.articles.slice(0, 3), searchForm.word.value);
+      // удалить выведенные элементы:
+      res.articles.splice(0, 3);
+      // если есть еще статьи, то отобразить кнопку
+      if (res.articles.length > 0) {
+        resultsButton.classList.add('results__button_is-visible');
+      }
+      // сохраняю оставшийся массив в переменной
+      return articles = res.articles.slice(0);
     })
     .catch((err) => {
-      console.log(33);
-      console.log(err);
+      alert(err.message);
     });
 });
 
+// слушаем... Кнопка Показать еще
+resultsButton.addEventListener('click', () => {
+  let threeArticles = '';
+  // отрисовать массив из следующих 3х статей
+  threeArticles = articles.slice(0, 3);
+  cardList.renderMainPage(threeArticles, searchForm.word.value);
+  if (articles.length <= 3) {
+    resultsButton.classList.remove('results__button_is-visible');
+    return;
+  }
+  // отрезаем, что отрисовали и возвращаем обновленный массив
+  return articles.splice(0, 3);
+});
 
 // Регистрация
 popupFormRegistration.addEventListener('submit', (event) => {
@@ -96,11 +144,7 @@ popupFormRegistration.addEventListener('submit', (event) => {
       popupFormRegistration.name.value,
     )
     .then((res) => {
-      console.log(55);
-      console.log(res);
       if (res.message) {
-        console.log(77);
-        console.log(res);
         return Promise.reject(res);
       }
       popupFormRegistration.reset();
@@ -108,8 +152,6 @@ popupFormRegistration.addEventListener('submit', (event) => {
       popupSuccessRegistration.open();
     })
     .catch((err) => {
-      console.log(66);
-      console.log(err);
       popupFormRegistration.querySelector('.popup__error').textContent = err.message;
     });
 });
@@ -123,15 +165,17 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupFormAuthorize.password.value,
     )
     .then((res) => {
-      console.log(res.data);
+      console.log(res);
+      if (res.message) {
+        return Promise.reject(res);
+      }
       PROPS.isLoggedIn = true;
-      console.log(777);
       popupFormAuthorize.reset();
       popupAuthorize.close();
       headerRender(res.data, PROPS.isLoggedIn);
     })
     .catch((err) => {
-      console.log(888);
+      popupFormAuthorize.querySelector('.popup__error').textContent = err.message;
       console.log(err);
     });
 });
@@ -141,12 +185,11 @@ headerButtonName.addEventListener('click', () => {
   mainApi
     .logout()
     .then((res) => {
-      console.log(res);
       PROPS.isLoggedIn = false;
       headerRenderLogout();
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.message);
     });
 });
 
@@ -168,12 +211,10 @@ articlesList.addEventListener('click', (event) => {
         event.target.closest('.article-card').querySelector('.article-card__image').style.backgroundImage.slice(5, -2),
       )
       .then((data) => {
-        console.log(data);
         article.like(event);
       })
       .catch((err) => {
-        console.log(66);
-        console.log(err);
+        alert(err.message);
       });
     // Если клик по синему флажку:
   } else if (event.target.classList.contains('article-card__delete-icon')) {
@@ -185,28 +226,43 @@ articlesList.addEventListener('click', (event) => {
       })
       .catch((err) => {
         console.log(`Удаление неуспешно: ${err}`);
+        alert(err.message);
       });
     article.like(event);
   }
 });
 
+// Всплывающая подсказка Войдите, чтобы сохранять статьи
+articlesList.addEventListener('mouseover', (event) => {
+  if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
+    event.target.closest('.article-card')
+      .querySelector('.article-card__hint-container')
+      .classList
+      .add('article-card__hint-container_is-opened');
+  }
+});
+
+// Убрать Всплывающую подсказку Войдите, чтобы сохранять статьи
+articlesList.addEventListener('mouseout', (event) => {
+  if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
+    event.target.closest('.article-card')
+      .querySelector('.article-card__hint-container')
+      .classList
+      .remove('article-card__hint-container_is-opened');
+  }
+});
 // функция для проверки авторизованности юзера
 function checkLogged() {
   mainApi.getUserInfo()
     .then((res) => {
       if (res.message) {
-        console.log(1000);
-        console.log(res);
         return Promise.reject(res);
       }
-      console.log(5000);
-      console.log(res);
       PROPS.isLoggedIn = true;
-      console.log(PROPS.isLoggedIn);
       headerRender(res.name, PROPS.isLoggedIn);
     })
     .catch((err) => {
-      console.log(1001);
       console.log(err.message);
+      // alert(err.message);
     });
 }

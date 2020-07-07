@@ -14,6 +14,18 @@
   margin-bottom: 0;
 }
 
+.popup__input:valid:not(:placeholder-shown) {
+  border-color: #ffdb4d;
+}
+
+.popup__input:invalid:not(:placeholder-shown) {
+  border-color: #df4b41;
+}
+
+.popup__input:invalid:not(:placeholder-shown)+.input__error {
+  display: block;
+}
+
 .input-container {
   margin-bottom: 13px;
 }
@@ -33,6 +45,7 @@
 }
 
 .input__error {
+  /* display: none; */
   font-family: Inter;
   font-style: normal;
   font-weight: normal;

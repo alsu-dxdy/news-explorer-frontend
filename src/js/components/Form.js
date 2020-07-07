@@ -1,3 +1,5 @@
-class Form {
+// class Form {
 
-}
+// }
+
+// см FormValidator
