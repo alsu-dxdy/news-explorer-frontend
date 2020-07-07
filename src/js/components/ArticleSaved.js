@@ -18,13 +18,19 @@ export default class ArticleSaved extends Article {
       </div>
 
     <div class="article-card__description">
-      <p class="article-card__date">${item.data}</p>
-      <h3 class="article-card__title">${item.title}</h3>
-      <p class="article-card__text">${item.text}</p>
-      <p class="article-card__source">${item.source}</p>
+      <p class="article-card__date"></p>
+      <h3 class="article-card__title"></h3>
+      <p class="article-card__text"></p>
+      <p class="article-card__source"></p>
     </div>
       `,
     );
+    // textContent-ы
+    articleCard.querySelector('.article-card__date').textContent = item.data;
+    articleCard.querySelector('.article-card__title').textContent = `${item.title}`;
+    articleCard.querySelector('.article-card__text').textContent = `${item.text}`;
+    articleCard.querySelector('.article-card__source').textContent = `${item.source}`;
+
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.image})`;
     articleCard.setAttribute('src', `${item.link}`);
     articleCard.setAttribute('id', `${item._id}`);
