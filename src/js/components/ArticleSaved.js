@@ -27,13 +27,13 @@ export default class ArticleSaved extends Article {
     );
     // textContent-ы
     articleCard.querySelector('.article-card__date').textContent = item.data;
-    articleCard.querySelector('.article-card__title').textContent = `${item.title}`;
-    articleCard.querySelector('.article-card__text').textContent = `${item.text}`;
-    articleCard.querySelector('.article-card__source').textContent = `${item.source}`;
+    articleCard.querySelector('.article-card__title').textContent = item.title;
+    articleCard.querySelector('.article-card__text').textContent = item.text;
+    articleCard.querySelector('.article-card__source').textContent = item.source;
 
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.image})`;
-    articleCard.setAttribute('src', `${item.link}`);
-    articleCard.setAttribute('id', `${item._id}`);
+    articleCard.setAttribute('src', item.link);
+    articleCard.setAttribute('id', item._id);
     return articleCard;
   }
 
