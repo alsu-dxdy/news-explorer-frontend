@@ -56,3 +56,12 @@
     margin: 0 0 32px 0;
   }
 }
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .account-info {
+    width: calc(100% - 32px);
+  }
+  .account-info__title {
+    width: calc(100% - 32px);
+  }
+}
