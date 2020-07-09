@@ -26,8 +26,12 @@ const newsApi = new NewsApi({
     'Content-Type': 'application/json',
   },
 });
+const header = document.querySelector('.header');
+const headerMenuMain = document.querySelector('.header__menu-main');
 const headerButtonAuthorize = document.querySelector('.header__button_authorize');
+const headerMenuArticles = document.querySelector('.header__menu-articles');
 const headerButtonName = document.querySelector('.header__button_name');
+
 const searchForm = document.querySelector('.search__form');
 
 const popupFormAuthorize = document.querySelector('.popup__form_authorize');
@@ -40,6 +44,8 @@ const resultsSearching = document.querySelector('.results__searching');
 const resultsGot = document.querySelector('.results__got');
 const resultsNothing = document.querySelector('.results__nothing');
 const resultsButton = document.querySelector('.results__button');
+
+
 /* Экземпляры классов */
 const article = new Article();
 const cardList = new ArticleList(articlesList, article, resultsButton);
@@ -68,7 +74,10 @@ export {
   PROPS,
   mainApi,
   newsApi,
+  header,
+  headerMenuMain,
   headerButtonAuthorize,
+  headerMenuArticles,
   headerButtonName,
   searchForm,
   popupFormAuthorize,

@@ -14,10 +14,12 @@ import FormValidator from './js/components/FormValidator';
 import './css/style.css';
 
 import {
-  PROPS, mainApi, newsApi, headerButtonAuthorize, headerButtonName,
+  PROPS, mainApi, newsApi,
+  header, headerMenuMain, headerButtonAuthorize, headerMenuArticles, headerButtonName,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
-  resultsSearching, resultsGot, resultsNothing, resultsButton, article, cardList,
+  resultsSearching, resultsGot, resultsNothing, resultsButton,
+  article, cardList,
   dateToday, date7daysAgo,
 } from './js/constants/constants';
 
@@ -45,22 +47,22 @@ headerMenu320.addEventListener('click', () => {
   console.log(77);
   // document.querySelector('.header').style.background = '#1A1B22';
   // headerMenu320.style.background = 'none';
-  document.querySelector('.header').classList.toggle('header_black-background');
+  header.classList.toggle('header_black-background');
   headerMenu320.classList.add('header__menu_invisible');
   headerClose320.classList.add('header__menu_visible');
-  document.querySelector('.header__menu-main')
-    .classList.add('header__menu_visible');
-  document.querySelector('.header__button_authorize')
-    .classList.add('header__menu_visible');
+
+  headerMenuMain.classList.add('header__menu_visible');
+  headerButtonAuthorize.classList.add('header__menu_visible');
 });
 
 headerClose320.addEventListener('click', () => {
   console.log(headerClose320);
   // document.querySelector('.header').style.backgroundImage = './images/search-320.png';
-  document.querySelector('.header').classList.toggle('header_black-background');
-  document.querySelector('.header__menu-main').classList.remove('header__menu_visible');
-  document.querySelector('.header__button_authorize')
-    .classList.remove('header__menu_visible');
+  header.classList.toggle('header_black-background');
+
+  headerMenuMain.classList.remove('header__menu_visible');
+  headerButtonAuthorize.classList.remove('header__menu_visible');
+
   headerMenu320.classList.remove('header__menu_invisible');
   headerClose320.classList.remove('header__menu_visible');
 });

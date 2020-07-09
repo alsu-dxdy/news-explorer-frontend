@@ -1,35 +1,33 @@
 /* eslint-disable no-undef */
+import {
+  headerButtonAuthorize, headerMenuArticles, headerButtonName,
+} from '../constants/constants';
+
 export function headerRender(name, isLogged) {
   if (isLogged) {
     // показать кнопку Сохраненные статьи
-    document.querySelector('.header__menu-articles')
-      .classList.add('header__menu-articles_is-opened');
+    headerMenuArticles.classList.add('header__menu-articles_is-opened');
     // показать кнопку с именем
-    document.querySelector('.header__button_name')
-      .classList.add('header__button_name_is-opened');
-    document.querySelector('.header__button_name').textContent = name;
+    headerButtonName.classList.add('header__button_name_is-opened');
+    headerButtonName.textContent = name;
 
     // скрыть копку Авторизоваться
-    document.querySelector('.header__button_authorize')
-      .classList.add('header__button_hidden');
+    headerButtonAuthorize.classList.add('header__button_hidden');
   }
 }
 
 export function headerRenderLogout() {
   // скрыть кнопку Сохраненные статьи
-  document.querySelector('.header__menu-articles')
-    .classList.remove('header__menu-articles_is-opened');
+  headerMenuArticles.classList.remove('header__menu-articles_is-opened');
   // скрыть кнопку с именем
-  document.querySelector('.header__button_name')
-    .classList.remove('header__button_name_is-opened');
+  headerButtonName.classList.remove('header__button_name_is-opened');
   // показать копку Авторизоваться
-  document.querySelector('.header__button_authorize')
-    .classList.remove('header__button_hidden');
+  headerButtonAuthorize.classList.remove('header__button_hidden');
 }
 
 export function renderAccountButton(name) {
   // засетить имя в кнопку
-  document.querySelector('.header__button_name').textContent = name;
+  headerButtonName.textContent = name;
 }
 
 export function renderAccountCount(name, count, word) {

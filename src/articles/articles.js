@@ -1,14 +1,14 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable consistent-return */
 /* eslint-disable no-undef */
 import ArticleSaved from '../js/components/ArticleSaved';
 import ArticleList from '../js/components/ArticleList';
-import { PROPS, mainApi } from '../js/constants/constants';
+import { PROPS, mainApi, headerButtonName } from '../js/constants/constants';
 
 import '../css/articles.css';
 
 const { renderAccountButton, renderAccountCount, renderAccountNotArticles } = require('../js/utils/headerRender');
 
-const headerButtonName = document.querySelector('.header__button_name');
 
 const articlesList = document.querySelector('.articles-list');
 const savedArticle = new ArticleSaved();
