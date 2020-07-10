@@ -15,8 +15,8 @@ import './css/style.css';
 
 import {
   PROPS, mainApi, newsApi,
-  header, headerMenuMain, headerButtonAuthorize,
-  headerMenuArticles, headerButtonName, headerMenuContainer320,
+  headerButtonAuthorize, headerButtonName,
+  headerMenu320, headerClose320,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
   resultsSearching, resultsGot, resultsNothing, resultsButton,
@@ -24,10 +24,13 @@ import {
   dateToday, date7daysAgo,
 } from './js/constants/constants';
 
-const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
+const {
+  headerRender, headerRenderLogout,
+} = require('./js/utils/headerRender');
 
-const headerMenu320 = document.querySelector('.header__button-320');
-const headerClose320 = document.querySelector('.header__close-320');
+const {
+  headerRenderMobileOpen, headerRenderMobileClose,
+} = require('./js/utils/headerRenderMobile');
 
 /* Экземпляры классов */
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
@@ -46,29 +49,12 @@ window.addEventListener('load', () => {
 
 headerMenu320.addEventListener('click', () => {
   console.log(77);
-  header.classList.toggle('header_black-background');
-  // headerMenuContainer320 чтобы не отображались за пределеами меню Сохр статьи и Кнопка с именем
-  headerMenuContainer320.classList.add('header__menu_visible');
-  headerMenu320.classList.add('header__menu_invisible');
-  headerClose320.classList.add('header__menu_visible');
-
-  headerMenuMain.classList.add('header__menu_visible');
-  if (!PROPS.isLoggedIn) {
-    headerButtonAuthorize.classList.add('header__menu_visible');
-  }
+  headerRenderMobileOpen();
 });
 
 headerClose320.addEventListener('click', () => {
   console.log(headerClose320);
-  header.classList.toggle('header_black-background');
-  // headerMenuContainer320 чтобы не отображались за пределеами меню Сохр статьи и Кнопка с именем
-  headerMenuContainer320.classList.remove('header__menu_visible');
-
-  headerMenuMain.classList.remove('header__menu_visible');
-  headerButtonAuthorize.classList.remove('header__menu_visible');
-
-  headerMenu320.classList.remove('header__menu_invisible');
-  headerClose320.classList.remove('header__menu_visible');
+  headerRenderMobileClose();
 });
 
 // Открытие popup Регистрация

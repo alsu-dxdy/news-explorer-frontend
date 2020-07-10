@@ -27,11 +27,14 @@ const newsApi = new NewsApi({
   },
 });
 const header = document.querySelector('.header');
+const headerLogo = document.querySelector('.header__logo');
 const headerMenuMain = document.querySelector('.header__menu-main');
 const headerButtonAuthorize = document.querySelector('.header__button_authorize');
 const headerMenuArticles = document.querySelector('.header__menu-articles');
 const headerButtonName = document.querySelector('.header__button_name');
 const headerMenuContainer320 = document.querySelector('.header__menu_container-320');
+const headerMenu320 = document.querySelector('.header__button-320');
+const headerClose320 = document.querySelector('.header__close-320');
 
 const searchForm = document.querySelector('.search__form');
 
@@ -76,11 +79,14 @@ export {
   mainApi,
   newsApi,
   header,
+  headerLogo,
   headerMenuMain,
   headerButtonAuthorize,
   headerMenuArticles,
   headerButtonName,
   headerMenuContainer320,
+  headerMenu320,
+  headerClose320,
   searchForm,
   popupFormAuthorize,
   popupFormRegistration,

@@ -3,12 +3,21 @@
 /* eslint-disable no-undef */
 import ArticleSaved from '../js/components/ArticleSaved';
 import ArticleList from '../js/components/ArticleList';
-import { PROPS, mainApi, headerButtonName } from '../js/constants/constants';
+import {
+  PROPS, mainApi, headerButtonName,
+  headerMenu320, headerClose320,
+} from '../js/constants/constants';
+
 
 import '../css/articles.css';
 
-const { renderAccountButton, renderAccountCount, renderAccountNotArticles } = require('../js/utils/headerRender');
+const {
+  renderAccountButton, renderAccountCount, renderAccountNotArticles,
+} = require('../js/utils/headerRender');
 
+const {
+  headerRenderMobileOpenAccount, headerRenderMobileCloseAccount,
+} = require('../js/utils/headerRenderMobile');
 
 const articlesList = document.querySelector('.articles-list');
 const savedArticle = new ArticleSaved();
@@ -20,6 +29,7 @@ window.addEventListener('load', () => {
       ([articles, userData]) => {
         // отрисовка хедера
         renderAccountButton(userData.name);
+        // если нет сохраненных статей: У вас нет сохраненных статей
         if (articles.message) {
           return renderAccountNotArticles(userData.name);
         }
@@ -39,6 +49,14 @@ window.addEventListener('load', () => {
     });
 });
 
+// Открытие, закрытие меню
+headerMenu320.addEventListener('click', () => {
+  headerRenderMobileOpenAccount();
+});
+
+headerClose320.addEventListener('click', () => {
+  headerRenderMobileCloseAccount();
+});
 
 // Удаление карточки
 articlesList.addEventListener('click', (event) => {

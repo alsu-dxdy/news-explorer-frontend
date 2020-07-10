@@ -104,6 +104,10 @@
   display: none;
 }
 
+.header__button-320.header__button-320_black {
+  background: url(../../images/menu-black.png) center no-repeat;
+}
+
 .header__close-320 {
   background: url(../../images/close_320.svg) center no-repeat;
   background-color: transparent;

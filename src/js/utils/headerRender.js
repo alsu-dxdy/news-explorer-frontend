@@ -27,10 +27,11 @@ export function headerRenderLogout() {
   headerButtonAuthorize.classList.remove('header__button_hidden');
   // показать на разрешении 320
   headerButtonAuthorize.classList.add('header__menu_visible');
-
 }
 
 export function renderAccountButton(name) {
+  // показать кнопку с именем
+  headerButtonName.classList.add('header__button_name_is-opened');
   // засетить имя в кнопку
   headerButtonName.textContent = name;
 }
