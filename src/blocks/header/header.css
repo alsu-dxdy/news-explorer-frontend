@@ -150,7 +150,6 @@
     z-index: 2;
   }
   .header__menu_container-320 {
-    border: 1px solid red;
     background: #1A1B22;
     width: calc(100% - 32px);
     margin: auto;

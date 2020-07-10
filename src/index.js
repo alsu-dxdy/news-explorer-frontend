@@ -47,6 +47,7 @@ window.addEventListener('load', () => {
 headerMenu320.addEventListener('click', () => {
   console.log(77);
   header.classList.toggle('header_black-background');
+  // headerMenuContainer320 чтобы не отображались за пределеами меню Сохр статьи и Кнопка с именем
   headerMenuContainer320.classList.add('header__menu_visible');
   headerMenu320.classList.add('header__menu_invisible');
   headerClose320.classList.add('header__menu_visible');
@@ -60,6 +61,7 @@ headerMenu320.addEventListener('click', () => {
 headerClose320.addEventListener('click', () => {
   console.log(headerClose320);
   header.classList.toggle('header_black-background');
+  // headerMenuContainer320 чтобы не отображались за пределеами меню Сохр статьи и Кнопка с именем
   headerMenuContainer320.classList.remove('header__menu_visible');
 
   headerMenuMain.classList.remove('header__menu_visible');
