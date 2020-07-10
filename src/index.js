@@ -15,7 +15,8 @@ import './css/style.css';
 
 import {
   PROPS, mainApi, newsApi,
-  header, headerMenuMain, headerButtonAuthorize, headerMenuArticles, headerButtonName,
+  header, headerMenuMain, headerButtonAuthorize,
+  headerMenuArticles, headerButtonName, headerMenuContainer320,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
   resultsSearching, resultsGot, resultsNothing, resultsButton,
@@ -45,20 +46,21 @@ window.addEventListener('load', () => {
 
 headerMenu320.addEventListener('click', () => {
   console.log(77);
-  // document.querySelector('.header').style.background = '#1A1B22';
-  // headerMenu320.style.background = 'none';
   header.classList.toggle('header_black-background');
+  headerMenuContainer320.classList.add('header__menu_visible');
   headerMenu320.classList.add('header__menu_invisible');
   headerClose320.classList.add('header__menu_visible');
 
   headerMenuMain.classList.add('header__menu_visible');
-  headerButtonAuthorize.classList.add('header__menu_visible');
+  if (!PROPS.isLoggedIn) {
+    headerButtonAuthorize.classList.add('header__menu_visible');
+  }
 });
 
 headerClose320.addEventListener('click', () => {
   console.log(headerClose320);
-  // document.querySelector('.header').style.backgroundImage = './images/search-320.png';
   header.classList.toggle('header_black-background');
+  headerMenuContainer320.classList.remove('header__menu_visible');
 
   headerMenuMain.classList.remove('header__menu_visible');
   headerButtonAuthorize.classList.remove('header__menu_visible');

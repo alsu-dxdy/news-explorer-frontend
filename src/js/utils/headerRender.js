@@ -13,6 +13,8 @@ export function headerRender(name, isLogged) {
 
     // скрыть копку Авторизоваться
     headerButtonAuthorize.classList.add('header__button_hidden');
+    // скрыть на разрешении 320
+    headerButtonAuthorize.classList.remove('header__menu_visible');
   }
 }
 
@@ -23,6 +25,9 @@ export function headerRenderLogout() {
   headerButtonName.classList.remove('header__button_name_is-opened');
   // показать копку Авторизоваться
   headerButtonAuthorize.classList.remove('header__button_hidden');
+  // показать на разрешении 320
+  headerButtonAuthorize.classList.add('header__menu_visible');
+
 }
 
 export function renderAccountButton(name) {

@@ -31,6 +31,7 @@ const headerMenuMain = document.querySelector('.header__menu-main');
 const headerButtonAuthorize = document.querySelector('.header__button_authorize');
 const headerMenuArticles = document.querySelector('.header__menu-articles');
 const headerButtonName = document.querySelector('.header__button_name');
+const headerMenuContainer320 = document.querySelector('.header__menu_container-320');
 
 const searchForm = document.querySelector('.search__form');
 
@@ -79,6 +80,7 @@ export {
   headerButtonAuthorize,
   headerMenuArticles,
   headerButtonName,
+  headerMenuContainer320,
   searchForm,
   popupFormAuthorize,
   popupFormRegistration,
