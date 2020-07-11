@@ -27,6 +27,10 @@ window.addEventListener('load', () => {
   Promise.all([mainApi.getArticles(), mainApi.getUserInfo()])
     .then(
       ([articles, userData]) => {
+        // редирект для на залогиненного юзера
+        if (userData.message) {
+          return window.location.href = './';
+        }
         // отрисовка хедера
         renderAccountButton(userData.name);
         // если нет сохраненных статей: У вас нет сохраненных статей
