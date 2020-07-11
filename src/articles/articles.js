@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable consistent-return */
 /* eslint-disable no-undef */

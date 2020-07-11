@@ -10,6 +10,7 @@ import MainApi from './js/api/MainApi';
 import NewsApi from './js/api/NewsApi';
 import Popup from './js/components/Popup';
 import FormValidator from './js/components/FormValidator';
+import FormValidatorByForm from './js/components/FormValidatorByForm';
 
 import './css/style.css';
 
@@ -40,6 +41,7 @@ const popupSuccessRegistration = new Popup(document.querySelector('.popup_succes
 /* Экземпляры для валидации (слушатели внутри класса FormValidator) */
 const formVAlidAuthorize = new FormValidator(document.querySelector('.popup_authorize'));
 const formVAlidRegistration = new FormValidator(document.querySelector('.popup_registration'));
+const formValidSearch = new FormValidatorByForm(searchForm);
 
 /* -----Слушатели событий----- */
 window.addEventListener('load', () => {

@@ -54,3 +54,20 @@
   color: #FF0000;
   margin-left: 6px;
 }
+
+.input__error_search {
+  margin-bottom: 80px;
+  margin-left: 24px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .input__error_search {
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .input__error_search {
+    margin-bottom: 16px;
+  }
+}

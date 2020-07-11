@@ -48,7 +48,7 @@
 }
 
 .search__input {
-  margin: 0 auto 80px;
+  margin: 0 auto 0;
   padding-left: 24px;
   width: 608px;
   height: 64px;
@@ -101,7 +101,7 @@
     width: 452px;
   }
   .search__input {
-    margin: 0 auto 48px;
+    margin: 0 auto 0;
     padding-left: 24px;
     width: 448px;
     height: 56px;
@@ -139,7 +139,7 @@
     flex-direction: column;
   }
   .search__input {
-    margin: 0 auto 16px;
+    margin: 0 auto 0;
     padding-left: 24px;
     width: 100%;
     /* width: calc(100% - 32px); */
