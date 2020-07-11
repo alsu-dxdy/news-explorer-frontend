@@ -29,4 +29,8 @@ body {
   /* выше для экранов больше 1600px отцентрировали весь контент */
 }
 
-@media (min-width: 1440px) {}
+@media (max-width: 1024px) {
+  /* div, h1, h2, p, section, form, input, img {
+    border: 1px solid red;
+  } */
+}
