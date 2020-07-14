@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -33,6 +34,15 @@ const {
   headerRenderMobileOpen, headerRenderMobileClose,
 } = require('./js/utils/headerRenderMobile');
 
+const {
+  showFirstArticles, showResultsNothing,
+} = require('./js/utils/showFirstArticles');
+
+// let {
+//   articles,
+// } = require('./js/utils/showFirstArticles');
+
+let articlesMainPage = [];
 /* Экземпляры классов */
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
@@ -50,12 +60,10 @@ window.addEventListener('load', () => {
 });
 
 headerMenu320.addEventListener('click', () => {
-  console.log(77);
   headerRenderMobileOpen();
 });
 
 headerClose320.addEventListener('click', () => {
-  console.log(headerClose320);
   headerRenderMobileClose();
 });
 
@@ -81,7 +89,6 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 });
 
 // Найти новости
-let articles = [];
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   resultsSearching.classList.add('results_is-opened');
@@ -89,25 +96,8 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
-      // Удалить прелоудер и Ничего не найдено
-      resultsSearching.classList.remove('results_is-opened');
-      resultsNothing.classList.remove('results_is-opened');
-      // Если ничего не нашлось, то отобразить Ничего не найдено
-      if (res.articles.length === 0) {
-        return resultsNothing.classList.add('results_is-opened');
-      }
-      // показать секцию Результаты поиска
-      resultsGot.classList.add('results_is-opened');
-      // отобразить первые 3 элемента
-      cardList.renderMainPage(res.articles.slice(0, 3), searchForm.word.value);
-      // удалить выведенные элементы:
-      res.articles.splice(0, 3);
-      // если есть еще статьи, то отобразить кнопку
-      if (res.articles.length > 0) {
-        resultsButton.classList.add('results__button_is-visible');
-      }
-      // сохраняю оставшийся массив в переменной
-      return articles = res.articles.slice(0);
+      showResultsNothing(res.articles);
+      return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value);
     })
     .catch((err) => {
       alert(err.message);
@@ -118,14 +108,14 @@ searchForm.addEventListener('submit', (event) => {
 resultsButton.addEventListener('click', () => {
   let threeArticles = '';
   // отрисовать массив из следующих 3х статей
-  threeArticles = articles.slice(0, 3);
+  threeArticles = articlesMainPage.slice(0, 3);
   cardList.renderMainPage(threeArticles, searchForm.word.value);
-  if (articles.length <= 3) {
+  if (articlesMainPage.length <= 3) {
     resultsButton.classList.remove('results__button_is-visible');
     return;
   }
   // отрезаем, что отрисовали и возвращаем обновленный массив
-  return articles.splice(0, 3);
+  return articlesMainPage.splice(0, 3);
 });
 
 // Регистрация

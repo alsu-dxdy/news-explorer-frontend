@@ -20,6 +20,8 @@ const {
   headerRenderMobileOpenAccount, headerRenderMobileCloseAccount,
 } = require('../js/utils/headerRenderMobile');
 
+let articles = []; // принимает остаток массива новостей
+
 const articlesList = document.querySelector('.articles-list');
 const savedArticle = new ArticleSaved();
 const savedArticlesList = new ArticleList(articlesList, savedArticle);
