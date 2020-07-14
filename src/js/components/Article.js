@@ -35,6 +35,7 @@ export default class Article {
     articleCard.insertAdjacentHTML(
       'beforeend',
       `
+      <a href="#" class="article-card__link"></a>
         <div class="article-card__image-container">
           <div class="article-card__image">
           <div class="article-card__hint-container">
@@ -49,6 +50,7 @@ export default class Article {
       <p class="article-card__source"></p>
         </div >
       </div >
+
         `,
     );
     // textContent-ы
@@ -58,6 +60,8 @@ export default class Article {
     articleCard.querySelector('.article-card__source').textContent = `${item.source.name}`;
 
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.urlToImage})`;
+    articleCard.querySelector('a').href = item.url;
+
     articleCard.setAttribute('src', `${item.url}`);
     articleCard.setAttribute('keyword', `${keyword}`);
     return articleCard;

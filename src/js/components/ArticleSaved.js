@@ -10,6 +10,7 @@ export default class ArticleSaved extends Article {
     articleCard.insertAdjacentHTML(
       'beforeend',
       `
+      <a href="#" class="article-card__link"></a>
       <div class="article-card__image">
         <div class="article-card__left-container">
           <p class="article-card__keyword">${item.keyword}</p>
@@ -32,6 +33,8 @@ export default class ArticleSaved extends Article {
     articleCard.querySelector('.article-card__source').textContent = item.source;
 
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.image})`;
+    articleCard.querySelector('a').href = item.link;
+
     articleCard.setAttribute('src', item.link);
     articleCard.setAttribute('id', item._id);
     return articleCard;
