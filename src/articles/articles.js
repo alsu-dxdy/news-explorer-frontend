@@ -7,6 +7,7 @@ import ArticleList from '../js/components/ArticleList';
 import {
   PROPS, mainApi, headerButtonName,
   headerMenu320, headerClose320,
+  results,
 } from '../js/constants/constants';
 
 
@@ -19,8 +20,6 @@ const {
 const {
   headerRenderMobileOpenAccount, headerRenderMobileCloseAccount,
 } = require('../js/utils/headerRenderMobile');
-
-let articles = []; // принимает остаток массива новостей
 
 const articlesList = document.querySelector('.articles-list');
 const savedArticle = new ArticleSaved();
@@ -44,14 +43,14 @@ window.addEventListener('load', () => {
           // имя, у вас 5 сохранённых статей
           renderAccountCount(userData.name, articles.articles.length, articles.articles[0].keyword);
           // показать секцию Результаты поиска
-          document.querySelector('.results')
-            .classList.add('results_is-opened');
+          results.classList.add('results_is-opened');
           savedArticlesList.render(articles.articles);
         }
         // Если articles.articles.length === 2, то передать 2е слово
       },
     )
     .catch((err) => {
+      alert(err);
       console.log(err);
     });
 });
@@ -92,6 +91,7 @@ headerButtonName.addEventListener('click', () => {
       window.location.href = './';
     })
     .catch((err) => {
+      alert(err);
       console.log(err);
     });
 });

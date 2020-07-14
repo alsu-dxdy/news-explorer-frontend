@@ -48,6 +48,7 @@ const resultsSearching = document.querySelector('.results__searching');
 const resultsGot = document.querySelector('.results__got');
 const resultsNothing = document.querySelector('.results__nothing');
 const resultsButton = document.querySelector('.results__button');
+const results = document.querySelector('.results');
 
 
 /* Экземпляры классов */
@@ -98,6 +99,7 @@ export {
   resultsGot,
   resultsNothing,
   resultsButton,
+  results,
 
   article,
   cardList,
