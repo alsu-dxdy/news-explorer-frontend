@@ -96,6 +96,7 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
+      console.log(res.articles);
       showResultsNothing(res.articles);
       return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value);
     })

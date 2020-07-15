@@ -55,8 +55,8 @@ export default class Article {
     );
     // textContent-ы
     articleCard.querySelector('.article-card__date').textContent = `${rusDate}`;
-    articleCard.querySelector('.article-card__title').textContent = `${item.description}`;
-    articleCard.querySelector('.article-card__text').textContent = `${item.content}`;
+    articleCard.querySelector('.article-card__title').textContent = `${item.title}`;
+    articleCard.querySelector('.article-card__text').textContent = `${item.description}`;
     articleCard.querySelector('.article-card__source').textContent = `${item.source.name}`;
 
     articleCard.querySelector('.article-card__image').style.backgroundImage = `url(${item.urlToImage})`;
