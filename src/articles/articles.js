@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
   Promise.all([mainApi.getArticles(), mainApi.getUserInfo()])
     .then(
       ([articles, userData]) => {
-        // редирект для на залогиненного юзера
+        // редирект для не залогиненного юзера
         if (userData.message) {
           return window.location.href = './';
         }

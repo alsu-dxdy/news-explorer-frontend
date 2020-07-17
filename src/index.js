@@ -38,11 +38,9 @@ const {
   showFirstArticles, showResultsNothing,
 } = require('./js/utils/showFirstArticles');
 
-// let {
-//   articles,
-// } = require('./js/utils/showFirstArticles');
+let articlesMainPage = []; // остаток массива статей после отображения 1-ых 3х статей
+let savedArticles = []; // сохр-ые статьи для синего флажка у уже сохр-ых статей
 
-let articlesMainPage = [];
 /* Экземпляры классов */
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
@@ -88,21 +86,45 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
   popupAuthorize.open();
 });
 
+
 // Найти новости
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   resultsSearching.classList.add('results_is-opened');
   articlesList.textContent = '';
-  newsApi
-    .getArticles(searchForm.word.value, date7daysAgo, dateToday)
-    .then((res) => {
-      console.log(res.articles);
-      showResultsNothing(res.articles);
-      return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value);
-    })
-    .catch((err) => {
-      alert(err.message);
-    });
+  if (PROPS.isLoggedIn) {
+    // запрос Сохраненных статей:
+    mainApi.getArticles()
+      .then((data) => {
+        return savedArticles = data.articles;
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+    // запрос Статей по запросу:
+    newsApi
+      .getArticles(searchForm.word.value, date7daysAgo, dateToday)
+      .then((res) => {
+        showResultsNothing(res.articles);
+        return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+  } else {
+    // Найти новости для нелогиненного юзера, т е без запроса Сохраненных статей:
+    newsApi
+      .getArticles(searchForm.word.value, date7daysAgo, dateToday)
+      .then((res) => {
+        console.log(res.articles);
+        showResultsNothing(res.articles);
+        return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
 });
 
 // слушаем... Кнопка Показать еще
@@ -110,7 +132,7 @@ resultsButton.addEventListener('click', () => {
   let threeArticles = '';
   // отрисовать массив из следующих 3х статей
   threeArticles = articlesMainPage.slice(0, 3);
-  cardList.renderMainPage(threeArticles, searchForm.word.value);
+  cardList.renderMainPage(threeArticles, searchForm.word.value, savedArticles);
   if (articlesMainPage.length <= 3) {
     resultsButton.classList.remove('results__button_is-visible');
     return;
