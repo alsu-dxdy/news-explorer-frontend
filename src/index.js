@@ -90,41 +90,32 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 // Найти новости
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  savedArticles.length = 0; // очистить массив
+  console.log(savedArticles);
   resultsSearching.classList.add('results_is-opened');
   articlesList.textContent = '';
+  // Если юзер залогинен
   if (PROPS.isLoggedIn) {
-    // запрос Сохраненных статей:
+    // запрос Сохраненных статей для залогиненного юзера:
     mainApi.getArticles()
       .then((data) => {
+        // сохр-ые статьи для синего флажка у уже сохр-ых статей
         return savedArticles = data.articles;
       })
       .catch((err) => {
         alert(err.message);
       });
-    // запрос Статей по запросу:
-    newsApi
-      .getArticles(searchForm.word.value, date7daysAgo, dateToday)
-      .then((res) => {
-        showResultsNothing(res.articles);
-        return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-
-  } else {
-    // Найти новости для нелогиненного юзера, т е без запроса Сохраненных статей:
-    newsApi
-      .getArticles(searchForm.word.value, date7daysAgo, dateToday)
-      .then((res) => {
-        console.log(res.articles);
-        showResultsNothing(res.articles);
-        return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
   }
+  // запрос Статей по запросу к newsApi:
+  newsApi
+    .getArticles(searchForm.word.value, date7daysAgo, dateToday)
+    .then((res) => {
+      showResultsNothing(res.articles);
+      return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
+    })
+    .catch((err) => {
+      alert(err.message);
+    });
 });
 
 // слушаем... Кнопка Показать еще
@@ -180,6 +171,8 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupFormAuthorize.reset();
       popupAuthorize.close();
       headerRender(res.data, PROPS.isLoggedIn);
+      savedArticles.length = 0; // очистить массив
+      console.log(savedArticles);
     })
     .catch((err) => {
       popupFormAuthorize.querySelector('.popup__error').textContent = err.message;

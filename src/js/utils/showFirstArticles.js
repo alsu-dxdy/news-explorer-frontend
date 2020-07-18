@@ -13,8 +13,10 @@ export function showFirstArticles(newsApiArticles, keyword, savedArticles) {
   // отобразить первые 3 элемента
   // Если savedArticles === undefined - значит запрос на Сохр-ные статьи не делали, т е юзер не залогинен
   if (savedArticles === undefined) {
+    // просто отрисовать статьи из newsApi
     cardList.renderMainPage(newsApiArticles.slice(0, 3), keyword);
   } else {
+    // отрисовать статьи из newsApi, предварительно проверяяя Синий флажок
     cardList.renderMainPage(newsApiArticles.slice(0, 3), keyword, savedArticles);
   }
   // удалить выведенные элементы:
