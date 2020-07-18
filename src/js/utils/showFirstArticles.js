@@ -11,14 +11,7 @@ export function showFirstArticles(newsApiArticles, keyword, savedArticles) {
   // показать секцию Результаты поиска
   resultsGot.classList.add('results_is-opened');
   // отобразить первые 3 элемента
-  // Если savedArticles === undefined - значит запрос на Сохр-ные статьи не делали, т е юзер не залогинен
-  if (savedArticles === undefined) {
-    // просто отрисовать статьи из newsApi
-    cardList.renderMainPage(newsApiArticles.slice(0, 3), keyword);
-  } else {
-    // отрисовать статьи из newsApi, предварительно проверяяя Синий флажок
-    cardList.renderMainPage(newsApiArticles.slice(0, 3), keyword, savedArticles);
-  }
+  cardList.renderMainPage(newsApiArticles.slice(0, 3), keyword, savedArticles);
   // удалить выведенные элементы:
   newsApiArticles.splice(0, 3);
   // если есть еще статьи, то отобразить кнопку

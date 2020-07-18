@@ -27,9 +27,9 @@ export default class ArticleList {
         newsApiArticles[i], keyword,
       );
 
-      // if likedArticles !== undefined, значит юзер залогинен =>
+      // if likedArticles > 0, значит есть Сохр-ные статьи =>
       // для уже Сохр-ных статей закрашивать флажок
-      if (likedArticles !== undefined) {
+      if (likedArticles.length > 0) {
         let isMyLike = false;
         let newsApiArticle = newsApiArticles[i];
 

@@ -91,7 +91,6 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   savedArticles.length = 0; // очистить массив
-  console.log(savedArticles);
   resultsSearching.classList.add('results_is-opened');
   articlesList.textContent = '';
   // Если юзер залогинен
@@ -163,7 +162,6 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupFormAuthorize.password.value,
     )
     .then((res) => {
-      console.log(res);
       if (res.message) {
         return Promise.reject(res);
       }
@@ -172,7 +170,6 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupAuthorize.close();
       headerRender(res.data, PROPS.isLoggedIn);
       savedArticles.length = 0; // очистить массив
-      console.log(savedArticles);
     })
     .catch((err) => {
       popupFormAuthorize.querySelector('.popup__error').textContent = err.message;
