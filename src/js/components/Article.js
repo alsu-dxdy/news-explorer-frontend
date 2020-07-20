@@ -38,10 +38,10 @@ export default class Article {
       <a href="#" class="article-card__link"></a>
         <div class="article-card__image-container">
           <div class="article-card__image">
-          <div class="article-card__hint-container">
+            <div class="article-card__hint-container">
               <p class="article-card__hint-text">Войдите, чтобы сохранять статьи</p>
-          </div>
-          <button class="article-card__like-icon"></button>
+            </div>
+            <button class="article-card__like-icon"></button>
           </div>
         <div class="article-card__description">
           <p class="article-card__date"></p>

@@ -17,3 +17,13 @@
     width: calc(100% - 60px);
   }
 }
+
+@media screen and (max-width: 425px) {
+  .popup__content {
+    width: 100%;
+  }
+  .popup__close {
+    top: -36px;
+    right: 0;
+  }
+}
