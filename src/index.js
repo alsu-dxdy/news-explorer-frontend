@@ -74,6 +74,8 @@ popupLinkRegistration.addEventListener('click', () => {
 // Открытие popup Вход
 headerButtonAuthorize.addEventListener('click', () => {
   popupAuthorize.open();
+  headerRenderMobileClose();
+
 });
 
 popupLinkAuthorize.addEventListener('click', () => {
