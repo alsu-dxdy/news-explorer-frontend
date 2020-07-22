@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {
-  headerButtonAuthorize, headerMenuArticles, headerButtonName,
+  headerButtonAuthorize, headerMenuArticles, headerButtonLogout,
 } from '../constants/constants';
 
 export function headerRender(name, isLogged) {
@@ -8,8 +8,8 @@ export function headerRender(name, isLogged) {
     // показать кнопку Сохраненные статьи
     headerMenuArticles.classList.add('header__menu-articles_is-opened');
     // показать кнопку с именем
-    headerButtonName.classList.add('header__button_name_is-opened');
-    headerButtonName.textContent = name;
+    headerButtonLogout.classList.add('header__button_logout_is-opened');
+    headerButtonLogout.textContent = name;
 
     // скрыть копку Авторизоваться
     headerButtonAuthorize.classList.add('header__button_hidden');
@@ -22,7 +22,7 @@ export function headerRenderLogout() {
   // скрыть кнопку Сохраненные статьи
   headerMenuArticles.classList.remove('header__menu-articles_is-opened');
   // скрыть кнопку с именем
-  headerButtonName.classList.remove('header__button_name_is-opened');
+  headerButtonLogout.classList.remove('header__button_logout_is-opened');
   // показать копку Авторизоваться
   headerButtonAuthorize.classList.remove('header__button_hidden');
   // показать на разрешении 320
@@ -31,9 +31,9 @@ export function headerRenderLogout() {
 
 export function renderAccountButton(name) {
   // показать кнопку с именем
-  headerButtonName.classList.add('header__button_name_is-opened');
+  headerButtonLogout.classList.add('header__button_logout_is-opened');
   // засетить имя в кнопку
-  headerButtonName.textContent = name;
+  headerButtonLogout.textContent = name;
 }
 
 export function renderAccountCount(name, count, word) {

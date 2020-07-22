@@ -17,7 +17,7 @@ import './css/style.css';
 
 import {
   PROPS, mainApi, newsApi,
-  headerButtonAuthorize, headerButtonName,
+  headerButtonAuthorize, headerButtonLogout,
   headerMenu320, headerClose320,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
@@ -180,7 +180,7 @@ popupFormAuthorize.addEventListener('submit', (event) => {
 });
 
 // logout
-headerButtonName.addEventListener('click', () => {
+headerButtonLogout.addEventListener('click', () => {
   mainApi
     .logout()
     .then((res) => {

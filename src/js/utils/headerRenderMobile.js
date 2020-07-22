@@ -1,7 +1,7 @@
 import {
   PROPS, header, headerLogo, headerMenuContainer320,
   headerMenu320, headerClose320,
-  headerMenuMain, headerButtonAuthorize, headerButtonName,
+  headerMenuMain, headerButtonAuthorize, headerButtonLogout,
 } from '../constants/constants';
 
 export function headerRenderMobileOpen() {
@@ -41,8 +41,8 @@ export function headerRenderMobileOpenAccount() {
   headerMenuMain.classList.add('header__menu_visible');
   headerMenuMain.classList.toggle('header_font-black');
 
-  headerButtonName.classList.toggle('header_font-black');
-  headerButtonName.classList.toggle('header__button_black');
+  headerButtonLogout.classList.toggle('header_font-black');
+  headerButtonLogout.classList.toggle('header__button_black');
 }
 
 export function headerRenderMobileCloseAccount() {
@@ -57,6 +57,6 @@ export function headerRenderMobileCloseAccount() {
   headerMenuMain.classList.remove('header__menu_visible');
   headerMenuMain.classList.toggle('header_font-black');
 
-  headerButtonName.classList.toggle('header_font-black');
-  headerButtonName.classList.toggle('header__button_black');
+  headerButtonLogout.classList.toggle('header_font-black');
+  headerButtonLogout.classList.toggle('header__button_black');
 }

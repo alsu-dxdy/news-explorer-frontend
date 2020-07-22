@@ -5,7 +5,7 @@
 import ArticleSaved from '../js/components/ArticleSaved';
 import ArticleList from '../js/components/ArticleList';
 import {
-  PROPS, mainApi, headerButtonName,
+  PROPS, mainApi, headerButtonLogout,
   headerMenu320, headerClose320,
   results,
 } from '../js/constants/constants';
@@ -82,7 +82,7 @@ articlesList.addEventListener('click', (event) => {
 });
 
 // logout
-headerButtonName.addEventListener('click', () => {
+headerButtonLogout.addEventListener('click', () => {
   mainApi
     .logout()
     .then((data) => {
