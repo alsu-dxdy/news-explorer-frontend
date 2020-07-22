@@ -8,7 +8,7 @@ export function headerRender(name, isLogged) {
     // показать кнопку Сохраненные статьи
     headerMenuArticles.classList.add('header__menu-articles_is-opened');
     // показать кнопку с именем
-    headerButtonLogout.classList.add('header__button_logout_is-opened');
+    headerButtonLogout.classList.add('header__user-name_is-opened');
     headerButtonLogout.textContent = name;
 
     // скрыть копку Авторизоваться
@@ -22,7 +22,7 @@ export function headerRenderLogout() {
   // скрыть кнопку Сохраненные статьи
   headerMenuArticles.classList.remove('header__menu-articles_is-opened');
   // скрыть кнопку с именем
-  headerButtonLogout.classList.remove('header__button_logout_is-opened');
+  headerButtonLogout.classList.remove('header__user-name_is-opened');
   // показать копку Авторизоваться
   headerButtonAuthorize.classList.remove('header__button_hidden');
   // показать на разрешении 320
@@ -31,7 +31,7 @@ export function headerRenderLogout() {
 
 export function renderAccountButton(name) {
   // показать кнопку с именем
-  headerButtonLogout.classList.add('header__button_logout_is-opened');
+  headerButtonLogout.classList.add('header__user-name_is-opened');
   // засетить имя в кнопку
   headerButtonLogout.textContent = name;
 }

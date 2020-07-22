@@ -25,7 +25,11 @@
           <a class="header__menu header__menu-main" href="./">Главная</a>
           <a class="header__menu header__menu-articles " href="./articles.html">Сохранённые статьи</a>
           <button class="header__button header__button_authorize">Авторизоваться</button>
-          <button class="header__button header__button_logout"></button>
+          <button class="header__button header__button_logout">
+            <span class="header__user-name"></span>
+            <img class="header__img-logout" src="<%=require('../images/exit1440white.svg').default%>"
+              alt="header__img-logout">
+          </button>
         </div>
       </header>
 
