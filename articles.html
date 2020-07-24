@@ -9,24 +9,30 @@
   <title>Сервис для поиска новостей</title>
   <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
     href="./images/favicon-N-16x16.png">
-  <link rel="stylesheet" href="style/articles.452e549fd825a4cd9e59.css">
+  <link rel="stylesheet" href="style/articles.a0fd1521983609692e69.css">
 </head>
 
 <body>
   <div class="root">
     <main class="content">
       <header class="header header_without-img ">
-        <button class="header__button-320 header__button-320_black"></button>
-        <button class="header__close-320"></button> <!-- кнопка = -->
+        <button class="header__button-320 header__button-320_black"></button><!-- кнопка = -->
+        <button class="header__close-320"></button>
         <!-- На 320 после нажатия header__button-320 появлется header__close-320  -->
         <p class="header__logo header_font-black">NewsExplorer</p>
 
         <div class="header__menu header__menu_container-320">
           <a class="header__menu header__menu-main header_font-black" href="./index.html">Главная</a>
           <a class="header__menu header__menu-articles header_font-black" href="./articles.html">Сохранённые статьи</a>
-          <button class="header__button header__button_name header_font-black header__button_black"><img
-              class="button__exit" src="./images/exit1440black.svg"
-              alt="button__exit"></button>
+          <button class="header__button header__button_logout header__button_black">
+            <span class="header__user-name header_font-black"></span>
+            <img class="header__img-logout" src="./images/exit1440black.svg"
+              alt="header__img-logout">
+          </button>
+
+          <!-- <button class="header__button header__user-name header_font-black header__button_black"><img
+              class="header__img-logout" src="./images/exit1440black.svg"
+              alt="header__img-logout"></button> -->
         </div>
       </header>
       <section class="account-info">
@@ -63,7 +69,7 @@
     </main>
 
   </div>
-  <script type="module" src="./js/articles.241146bcc488fa9c4750.js"></script>
+  <script type="module" src="./js/articles.9e277f6acee587b5ad4c.js"></script>
 </body>
 
 </html>
