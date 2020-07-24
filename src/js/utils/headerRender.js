@@ -33,7 +33,7 @@ export function renderAccountButton(name) {
   // показать кнопку с именем
   headerButtonLogout.classList.add('header__user-name_is-opened');
   // засетить имя в кнопку
-  headerButtonLogout.textContent = name;
+  headerUserName.textContent = name;
 }
 
 export function renderAccountCount(name, count, word) {
