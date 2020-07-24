@@ -5,7 +5,7 @@
   background-size: cover;
   background-position-y: -80px;
   background-repeat: no-repeat;
-  /* padding-top: 80px; */
+  padding-top: 80px;
 }
 
 .search__container {
@@ -80,7 +80,7 @@
 
 @media screen and (min-width:768px) and (max-width:1023px) {
   .search {
-    min-height: 334px;
+    height: 334px;
     background-position-y: -66px;
     padding-top: 38px;
   }
