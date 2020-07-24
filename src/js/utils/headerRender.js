@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {
-  headerButtonAuthorize, headerMenuArticles, headerButtonLogout,
+  headerButtonAuthorize, headerMenuArticles, headerButtonLogout, headerUserName,
 } from '../constants/constants';
 
 export function headerRender(name, isLogged) {
@@ -9,7 +9,7 @@ export function headerRender(name, isLogged) {
     headerMenuArticles.classList.add('header__menu-articles_is-opened');
     // показать кнопку с именем
     headerButtonLogout.classList.add('header__user-name_is-opened');
-    headerButtonLogout.textContent = name;
+    headerUserName.textContent = name;
 
     // скрыть копку Авторизоваться
     headerButtonAuthorize.classList.add('header__button_hidden');

@@ -82,13 +82,13 @@
 
 /* кнопка с именем скрыта по умолчанию*/
 
-.header__button.header__user-name {
+.header__button.header__button_logout {
   display: none;
 }
 
 /* кнопку с именем показать*/
 
-.header__button.header__user-name.header__user-name_is-opened {
+.header__button.header__button_logout.header__user-name_is-opened {
   display: inline-block;
 }
 

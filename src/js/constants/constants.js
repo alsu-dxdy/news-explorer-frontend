@@ -31,7 +31,8 @@ const headerLogo = document.querySelector('.header__logo');
 const headerMenuMain = document.querySelector('.header__menu-main');
 const headerButtonAuthorize = document.querySelector('.header__button_authorize');
 const headerMenuArticles = document.querySelector('.header__menu-articles');
-const headerButtonLogout = document.querySelector('.header__user-name');
+const headerButtonLogout = document.querySelector('.header__button_logout');
+const headerUserName = document.querySelector('.header__user-name');
 const headerMenuContainer320 = document.querySelector('.header__menu_container-320');
 const headerMenu320 = document.querySelector('.header__button-320');
 const headerClose320 = document.querySelector('.header__close-320');
@@ -85,6 +86,7 @@ export {
   headerButtonAuthorize,
   headerMenuArticles,
   headerButtonLogout,
+  headerUserName,
   headerMenuContainer320,
   headerMenu320,
   headerClose320,
