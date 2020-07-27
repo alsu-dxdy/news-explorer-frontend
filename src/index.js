@@ -21,7 +21,7 @@ import {
   headerMenu320, headerClose320,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
-  resultsSearching, resultsGot, resultsNothing, resultsButton,
+  resultsSearching, resultsGot, resultsServerError, resultsButton,
   article, cardList,
   dateToday, date7daysAgo,
 } from './js/constants/constants';
@@ -35,7 +35,7 @@ const {
 } = require('./js/utils/headerRenderMobile');
 
 const {
-  showFirstArticles, showResultsNothing,
+  showFirstArticles, showResultsNothing, showMessageServerError
 } = require('./js/utils/showFirstArticles');
 
 let articlesMainPage = []; // остаток массива статей после отображения 1-ых 3х статей
@@ -93,8 +93,9 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   savedArticles.length = 0; // очистить массив
-  resultsSearching.classList.add('results_is-opened');
   articlesList.textContent = '';
+  resultsServerError.classList.remove('results_is-opened');
+  resultsSearching.classList.add('results_is-opened');
   // Если юзер залогинен
   if (PROPS.isLoggedIn) {
     // запрос Сохраненных статей для залогиненного юзера:
@@ -115,8 +116,10 @@ searchForm.addEventListener('submit', (event) => {
       return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
     })
     .catch((err) => {
-      alert(err.message);
+      console.log(500);
+      showMessageServerError();
     });
+
 });
 
 // слушаем... Кнопка Показать еще

@@ -49,6 +49,7 @@ const articlesList = document.querySelector('.articles-list');
 const resultsSearching = document.querySelector('.results__searching');
 const resultsGot = document.querySelector('.results__got');
 const resultsNothing = document.querySelector('.results__nothing');
+const resultsServerError = document.querySelector('.results__server-error');
 const resultsButton = document.querySelector('.results__button');
 const results = document.querySelector('.results');
 
@@ -102,6 +103,7 @@ export {
   resultsSearching,
   resultsGot,
   resultsNothing,
+  resultsServerError,
   resultsButton,
   results,
 

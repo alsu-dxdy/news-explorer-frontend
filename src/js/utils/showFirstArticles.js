@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import {
-  resultsSearching, resultsNothing, resultsGot, resultsButton,
-  cardList,
+  resultsSearching, resultsNothing, resultsServerError,
+  resultsGot, resultsButton, cardList,
 } from '../constants/constants';
 
 // export let articles = []; // принимает остаток массива новостей
@@ -31,4 +31,14 @@ export function showResultsNothing(newsApiArticles) {
   if (newsApiArticles.length === 0) {
     return resultsNothing.classList.add('results_is-opened');
   }
+}
+
+export function showMessageServerError() {
+  // Удалить прелоудер и Ничего не найдено
+  resultsSearching.classList.remove('results_is-opened');
+  resultsNothing.classList.remove('results_is-opened');
+  // Если ничего не нашлось, то отобразить Ничего не найдено
+
+  return resultsServerError
+    .classList.add('results_is-opened');
 }
