@@ -95,6 +95,7 @@ searchForm.addEventListener('submit', (event) => {
   savedArticles.length = 0; // очистить массив
   articlesList.textContent = '';
   resultsServerError.classList.remove('results_is-opened');
+  resultsGot.classList.remove('results_is-opened');
   resultsSearching.classList.add('results_is-opened');
   // Если юзер залогинен
   if (PROPS.isLoggedIn) {
