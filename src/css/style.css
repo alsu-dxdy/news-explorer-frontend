@@ -30,7 +30,7 @@ body {
 }
 
 @media (max-width: 1024px) {
-  /* div, h1, h2, p, section, form, input, img {
+  /* section, div, h1, p, form, input, span, button {
     border: 1px solid red;
   } */
 }

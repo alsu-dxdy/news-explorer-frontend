@@ -121,7 +121,7 @@
 
  @media screen and (min-width:320px) and (max-width:767px) {
    .results__got {
-     padding: 24px 16px 0;
+     padding: 24px 0 0;
    }
    .results__title {
      padding: 0;
