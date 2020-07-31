@@ -26,6 +26,8 @@ import {
   dateToday, date7daysAgo,
 } from './js/constants/constants';
 
+const { checkLogged } = require('./js/utils/checkLogged');
+
 const {
   headerRender, headerRenderLogout,
 } = require('./js/utils/headerRender');
@@ -244,18 +246,4 @@ articlesList.addEventListener('mouseout', (event) => {
       .remove('article-card__hint-container_is-opened');
   }
 });
-// функция для проверки авторизованности юзера
-function checkLogged() {
-  mainApi.getUserInfo()
-    .then((res) => {
-      if (res.message) {
-        return Promise.reject(res);
-      }
-      PROPS.isLoggedIn = true;
-      headerRender(res.name, PROPS.isLoggedIn);
-    })
-    .catch((err) => {
-      console.log(err.message);
-      // alert(err.message);
-    });
-}
+
