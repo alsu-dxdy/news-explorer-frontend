@@ -21,8 +21,8 @@ import {
   headerMenu320, headerClose320,
   searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
-  resultsSearching, resultsGot, resultsServerError, resultsButton,
-  article, cardList,
+  resultsSearching, resultsGot, resultsServerError, resultsNothing,
+  resultsButton, article, cardList,
   dateToday, date7daysAgo,
 } from './js/constants/constants';
 
@@ -37,7 +37,7 @@ const {
 } = require('./js/utils/headerRenderMobile');
 
 const {
-  showFirstArticles, showResultsNothing, showMessageServerError
+  showFirstArticles, removePastResults, showMessageServerError
 } = require('./js/utils/showFirstArticles');
 
 let articlesMainPage = []; // остаток массива статей после отображения 1-ых 3х статей
@@ -96,8 +96,8 @@ searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   savedArticles.length = 0; // очистить массив
   articlesList.textContent = '';
-  resultsServerError.classList.remove('results_is-opened');
-  resultsGot.classList.remove('results_is-opened');
+  removePastResults();
+  // Прелоудер отобразить
   resultsSearching.classList.add('results_is-opened');
   // Если юзер залогинен
   if (PROPS.isLoggedIn) {
@@ -115,11 +115,18 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
-      showResultsNothing(res.articles);
+      // Удалить прелоудер
+      resultsSearching.classList.remove('results_is-opened');
+      // Если ничего не нашлось, то отобразить Ничего не найдено
+      if (res.articles.length === 0) {
+        return resultsNothing.classList.add('results_is-opened');
+      }
+
       return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
     })
     .catch((err) => {
       console.log(500);
+      removePastResults();
       showMessageServerError();
     });
 

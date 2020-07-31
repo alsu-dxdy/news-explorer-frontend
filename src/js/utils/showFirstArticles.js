@@ -23,22 +23,15 @@ export function showFirstArticles(newsApiArticles, keyword, savedArticles) {
   return newsApiArticles.slice(0);
 }
 
-export function showResultsNothing(newsApiArticles) {
-  // Удалить прелоудер и Ничего не найдено
+export function removePastResults() {
+  // Удалить прелоудер, 500ю ошибку, предыдущие результаты, Ничего не най
   resultsSearching.classList.remove('results_is-opened');
+  resultsServerError.classList.remove('results_is-opened');
+  resultsGot.classList.remove('results_is-opened');
   resultsNothing.classList.remove('results_is-opened');
-  // Если ничего не нашлось, то отобразить Ничего не найдено
-  if (newsApiArticles.length === 0) {
-    return resultsNothing.classList.add('results_is-opened');
-  }
 }
 
 export function showMessageServerError() {
-  // Удалить прелоудер и Ничего не найдено
-  resultsSearching.classList.remove('results_is-opened');
-  resultsNothing.classList.remove('results_is-opened');
-  // Если ничего не нашлось, то отобразить Ничего не найдено
-
-  return resultsServerError
+  resultsServerError
     .classList.add('results_is-opened');
 }
