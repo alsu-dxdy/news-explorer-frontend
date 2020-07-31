@@ -125,7 +125,7 @@
    }
    .results__title {
      padding: 0;
-     margin: 32px 0 24px;
+     margin: 32px 0 24px 20px;
    }
    .results__button {
      width: 288px;
