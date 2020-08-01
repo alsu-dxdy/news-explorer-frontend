@@ -41,6 +41,10 @@ const {
   showFirstArticles, removePastResults, showMessageServerError
 } = require('./js/utils/showFirstArticles');
 
+const {
+  lockForm, unLockForm
+} = require('./js/utils/lockForm');
+
 let articlesMainPage = []; // остаток массива статей после отображения 1-ых 3х статей
 let savedArticles = []; // сохр-ые статьи для синего флажка у уже сохр-ых статей
 
@@ -95,13 +99,11 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
 // Найти новости
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  // Залочить инпут и кнопку поиска
+  lockForm();
   savedArticles.length = 0; // очистить массив
   articlesList.textContent = '';
   removePastResults();
-  // Залочить инпут и кнопку поиска
-  searchInput.setAttribute('disabled', true);
-  searchButton.setAttribute('disabled', true);
-  searchButton.classList.add('button_disabled');
   // Прелоудер отобразить
   resultsSearching.classList.add('results_is-opened');
   // Если юзер залогинен
@@ -121,9 +123,7 @@ searchForm.addEventListener('submit', (event) => {
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
       // Разлочить инпут и кнопку поиска
-      searchInput.removeAttribute('disabled');
-      searchButton.removeAttribute('disabled');
-      searchButton.classList.remove('button_disabled');
+      unLockForm();
       // Удалить прелоудер
       resultsSearching.classList.remove('results_is-opened');
       // Если ничего не нашлось, то отобразить Ничего не найдено
@@ -134,7 +134,13 @@ searchForm.addEventListener('submit', (event) => {
       return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
     })
     .catch((err) => {
-      console.log(500);
+      console.log(searchInput.hasAttribute('disabled'));
+      if (
+        searchInput.hasAttribute('disabled') && searchButton.hasAttribute('disabled')
+      ) {
+        // Разлочить инпут и кнопку поиска
+        unLockForm();
+      }
       removePastResults();
       showMessageServerError();
     });
