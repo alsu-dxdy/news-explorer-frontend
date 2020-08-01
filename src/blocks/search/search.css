@@ -78,6 +78,12 @@
   cursor: pointer;
 }
 
+.search__button.button_disabled {
+  background: #E6E8EB;
+  color: #B6BCBF;
+  border: none;
+}
+
 @media screen and (min-width:768px) and (max-width:1023px) {
   .search {
     height: 334px;

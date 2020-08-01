@@ -39,6 +39,9 @@ const headerMenu320 = document.querySelector('.header__button-320');
 const headerClose320 = document.querySelector('.header__close-320');
 
 const searchForm = document.querySelector('.search__form');
+const searchInput = document.querySelector('.search__input');
+const searchButton = document.querySelector('.search__button');
+
 
 const popupFormAuthorize = document.querySelector('.popup__form_authorize');
 const popupFormRegistration = document.querySelector('.popup__form_registration');
@@ -94,6 +97,8 @@ export {
   headerMenu320,
   headerClose320,
   searchForm,
+  searchInput,
+  searchButton,
   popupFormAuthorize,
   popupFormRegistration,
   popupLinkRegistration,

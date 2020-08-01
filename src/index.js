@@ -19,9 +19,10 @@ import {
   PROPS, mainApi, newsApi,
   headerButtonAuthorize, headerButtonLogout,
   headerMenu320, headerClose320,
-  searchForm, popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
+  searchForm, searchInput, searchButton,
+  popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
   popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
-  resultsSearching, resultsGot, resultsServerError, resultsNothing,
+  resultsSearching, resultsNothing,
   resultsButton, article, cardList,
   dateToday, date7daysAgo,
 } from './js/constants/constants';
@@ -97,6 +98,10 @@ searchForm.addEventListener('submit', (event) => {
   savedArticles.length = 0; // очистить массив
   articlesList.textContent = '';
   removePastResults();
+  // Залочить инпут и кнопку поиска
+  searchInput.setAttribute('disabled', true);
+  searchButton.setAttribute('disabled', true);
+  searchButton.classList.add('button_disabled');
   // Прелоудер отобразить
   resultsSearching.classList.add('results_is-opened');
   // Если юзер залогинен
@@ -115,6 +120,10 @@ searchForm.addEventListener('submit', (event) => {
   newsApi
     .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
+      // Разлочить инпут и кнопку поиска
+      searchInput.removeAttribute('disabled');
+      searchButton.removeAttribute('disabled');
+      searchButton.classList.remove('button_disabled');
       // Удалить прелоудер
       resultsSearching.classList.remove('results_is-opened');
       // Если ничего не нашлось, то отобразить Ничего не найдено
