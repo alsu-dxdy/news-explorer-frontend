@@ -5,10 +5,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
-import Article from './js/components/Article';
-import ArticleList from './js/components/ArticleList';
-import MainApi from './js/api/MainApi';
-import NewsApi from './js/api/NewsApi';
 import Popup from './js/components/Popup';
 import FormValidator from './js/components/FormValidator';
 import FormValidatorByForm from './js/components/FormValidatorByForm';
@@ -101,16 +97,20 @@ searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   // Залочить инпут и кнопку поиска
   lockForm();
-  savedArticles.length = 0; // очистить массив
   articlesList.textContent = '';
   removePastResults();
   // Прелоудер отобразить
   resultsSearching.classList.add('results_is-opened');
   // Если юзер залогинен
   if (PROPS.isLoggedIn) {
+    savedArticles.length = 0; // очистить массив от предыдущего запроса
     // запрос Сохраненных статей для залогиненного юзера:
     mainApi.getArticles()
       .then((data) => {
+        console.log(data.message);
+        if (data.message.includes('does not exist')) {
+          return;
+        }
         // сохр-ые статьи для синего флажка у уже сохр-ых статей
         return savedArticles = data.articles;
       })
