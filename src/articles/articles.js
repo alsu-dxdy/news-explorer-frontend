@@ -1,13 +1,25 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable consistent-return */
 /* eslint-disable no-undef */
 import ArticleSaved from '../js/components/ArticleSaved';
 import ArticleList from '../js/components/ArticleList';
-import { PROPS, mainApi } from '../js/constants/constants';
+import {
+  PROPS, mainApi, headerButtonLogout,
+  headerMenu320, headerClose320,
+  results,
+} from '../js/constants/constants';
+
 
 import '../css/articles.css';
 
-const { renderAccountButton, renderAccountCount } = require('../js/utils/headerRender');
+const {
+  renderAccountButton, renderAccountCount, renderAccountNotArticles,
+} = require('../js/utils/headerRender');
 
-const headerButtonName = document.querySelector('.header__button_name');
+const {
+  headerRenderMobileOpenAccount, headerRenderMobileCloseAccount,
+} = require('../js/utils/headerRenderMobile');
 
 const articlesList = document.querySelector('.articles-list');
 const savedArticle = new ArticleSaved();
@@ -17,28 +29,40 @@ window.addEventListener('load', () => {
   Promise.all([mainApi.getArticles(), mainApi.getUserInfo()])
     .then(
       ([articles, userData]) => {
+        // редирект для не залогиненного юзера
+        if (userData.message) {
+          return window.location.href = './';
+        }
         // отрисовка хедера
         renderAccountButton(userData.name);
-
+        // если нет сохраненных статей: У вас нет сохраненных статей
+        if (articles.message) {
+          return renderAccountNotArticles(userData.name);
+        }
         if (articles.articles.length > 0) {
           // имя, у вас 5 сохранённых статей
           renderAccountCount(userData.name, articles.articles.length, articles.articles[0].keyword);
           // показать секцию Результаты поиска
-          document.querySelector('.results')
-            .classList.add('results_is-opened');
+          results.classList.add('results_is-opened');
           savedArticlesList.render(articles.articles);
-          // Если articles.articles.length === 2, то передать 2е слово
-        } else {
-          console.log('У вас нет сохраненных статей');
         }
-        //
+        // Если articles.articles.length === 2, то передать 2е слово
       },
     )
     .catch((err) => {
+      alert(err);
       console.log(err);
     });
 });
 
+// Открытие, закрытие меню
+headerMenu320.addEventListener('click', () => {
+  headerRenderMobileOpenAccount();
+});
+
+headerClose320.addEventListener('click', () => {
+  headerRenderMobileCloseAccount();
+});
 
 // Удаление карточки
 articlesList.addEventListener('click', (event) => {
@@ -58,7 +82,7 @@ articlesList.addEventListener('click', (event) => {
 });
 
 // logout
-headerButtonName.addEventListener('click', () => {
+headerButtonLogout.addEventListener('click', () => {
   mainApi
     .logout()
     .then((data) => {
@@ -67,6 +91,7 @@ headerButtonName.addEventListener('click', () => {
       window.location.href = './';
     })
     .catch((err) => {
+      alert(err);
       console.log(err);
     });
 });

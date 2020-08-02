@@ -1,6 +1,7 @@
-export default class FormValidator {
-  constructor(popup) {
-    this.form = popup.querySelector('form');
+export default class FormValidatorByForm {
+  // этот класс принимает в конст-ре форму, а не попап
+  constructor(form) {
+    this.form = form;
     this.button = this.form.querySelector('button');
     this.form.addEventListener('input', this.setEventListeners.bind(this));
   }
@@ -18,10 +19,6 @@ export default class FormValidator {
 
     if (input.validity.tooLong) {
       return (error.textContent = 'Должно быть от 2 до 30 символов');
-    }
-
-    if (input.validity.typeMismatch) {
-      return (error.textContent = 'Введите корректный email');
     }
 
     error.textContent = '';

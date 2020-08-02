@@ -1,35 +1,50 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable consistent-return */
+/* eslint-disable prefer-const */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import Article from './js/components/Article';
-import ArticleList from './js/components/ArticleList';
-import MainApi from './js/api/MainApi';
-import NewsApi from './js/api/NewsApi';
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable consistent-return */
 import Popup from './js/components/Popup';
 import FormValidator from './js/components/FormValidator';
+import FormValidatorByForm from './js/components/FormValidatorByForm';
 
 import './css/style.css';
 
-import { PROPS, mainApi, newsApi } from './js/constants/constants';
+import {
+  PROPS, mainApi, newsApi,
+  headerButtonAuthorize, headerButtonLogout,
+  headerMenu320, headerClose320,
+  searchForm, searchInput, searchButton,
+  popupFormAuthorize, popupFormRegistration, popupLinkRegistration,
+  popupLinkAuthorize, popupLinkLogInAfterSuccessReg, articlesList,
+  resultsSearching, resultsNothing,
+  resultsButton, article, cardList,
+  dateToday, date7daysAgo,
+} from './js/constants/constants';
 
-const { headerRender, headerRenderLogout } = require('./js/utils/headerRender');
+const { checkLogged } = require('./js/utils/checkLogged');
 
-const headerButtonAuthorize = document.querySelector('.header__button_authorize');
-const headerButtonName = document.querySelector('.header__button_name');
+const {
+  headerRender, headerRenderLogout,
+} = require('./js/utils/headerRender');
 
-const searchForm = document.querySelector('.search__form');
+const {
+  headerRenderMobileOpen, headerRenderMobileClose,
+} = require('./js/utils/headerRenderMobile');
 
-const popupFormAuthorize = document.querySelector('.popup__form_authorize');
-const popupFormRegistration = document.querySelector('.popup__form_registration');
-const popupLinkRegistration = document.querySelector('.popup__link_registration'); // ссылка Зарегистрироваться
-const popupLinkAuthorize = document.querySelector('.popup__link_authorize'); // ссылка Войти
-const popupLinkLogInAfterSuccessReg = document.querySelector('.popup__link_log-in'); // ссылка Выполнить вход
-const articlesList = document.querySelector('.articles-list');
+const {
+  showFirstArticles, removePastResults, showMessageServerError
+} = require('./js/utils/showFirstArticles');
+
+const {
+  lockForm, unLockForm
+} = require('./js/utils/lockForm');
+
+let articlesMainPage = []; // остаток массива статей после отображения 1-ых 3х статей
+let savedArticles = []; // сохр-ые статьи для синего флажка у уже сохр-ых статей
 
 /* Экземпляры классов */
-const article = new Article();
-const cardList = new ArticleList(articlesList, article);
 const popupAuthorize = new Popup(document.querySelector('.popup_authorize'));
 const popupRegistration = new Popup(document.querySelector('.popup_registration'));
 const popupSuccessRegistration = new Popup(document.querySelector('.popup_success-registration'));
@@ -37,13 +52,20 @@ const popupSuccessRegistration = new Popup(document.querySelector('.popup_succes
 /* Экземпляры для валидации (слушатели внутри класса FormValidator) */
 const formVAlidAuthorize = new FormValidator(document.querySelector('.popup_authorize'));
 const formVAlidRegistration = new FormValidator(document.querySelector('.popup_registration'));
-
+const formValidSearch = new FormValidatorByForm(searchForm);
 
 /* -----Слушатели событий----- */
 window.addEventListener('load', () => {
-  console.log(PROPS);
-  console.log(PROPS.isLoggedIn);
+  // функция для проверки авторизованности юзера
   checkLogged();
+});
+
+headerMenu320.addEventListener('click', () => {
+  headerRenderMobileOpen();
+});
+
+headerClose320.addEventListener('click', () => {
+  headerRenderMobileClose();
 });
 
 // Открытие popup Регистрация
@@ -55,6 +77,8 @@ popupLinkRegistration.addEventListener('click', () => {
 // Открытие popup Вход
 headerButtonAuthorize.addEventListener('click', () => {
   popupAuthorize.open();
+  headerRenderMobileClose();
+
 });
 
 popupLinkAuthorize.addEventListener('click', () => {
@@ -67,24 +91,75 @@ popupLinkLogInAfterSuccessReg.addEventListener('click', () => {
   popupAuthorize.open();
 });
 
+
 // Найти новости
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
-
+  // Залочить инпут и кнопку поиска
+  lockForm();
+  articlesList.textContent = '';
+  removePastResults();
+  // Прелоудер отобразить
+  resultsSearching.classList.add('results_is-opened');
+  // Если юзер залогинен
+  if (PROPS.isLoggedIn) {
+    savedArticles.length = 0; // очистить массив от предыдущего запроса
+    // запрос Сохраненных статей для залогиненного юзера:
+    mainApi.getArticles()
+      .then((data) => {
+        console.log(data.message);
+        if (data.message.includes('does not exist')) {
+          return;
+        }
+        // сохр-ые статьи для синего флажка у уже сохр-ых статей
+        return savedArticles = data.articles;
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
+  // запрос Статей по запросу к newsApi:
   newsApi
-    .getInitialCards(searchForm.word.value)
+    .getArticles(searchForm.word.value, date7daysAgo, dateToday)
     .then((res) => {
-      // показать секцию Результаты поиска
-      document.querySelector('.results')
-        .classList.add('results_is-opened');
-      cardList.renderMainPage(res.articles, searchForm.word.value);
+      // Разлочить инпут и кнопку поиска
+      unLockForm();
+      // Удалить прелоудер
+      resultsSearching.classList.remove('results_is-opened');
+      // Если ничего не нашлось, то отобразить Ничего не найдено
+      if (res.articles.length === 0) {
+        return resultsNothing.classList.add('results_is-opened');
+      }
+
+      return articlesMainPage = showFirstArticles(res.articles, searchForm.word.value, savedArticles);
     })
     .catch((err) => {
-      console.log(33);
-      console.log(err);
+      console.log(searchInput.hasAttribute('disabled'));
+      if (
+        searchInput.hasAttribute('disabled') && searchButton.hasAttribute('disabled')
+      ) {
+        // Разлочить инпут и кнопку поиска
+        unLockForm();
+      }
+      removePastResults();
+      showMessageServerError();
     });
+
 });
 
+// слушаем... Кнопка Показать еще
+resultsButton.addEventListener('click', () => {
+  let threeArticles = '';
+  // отрисовать массив из следующих 3х статей
+  threeArticles = articlesMainPage.slice(0, 3);
+  cardList.renderMainPage(threeArticles, searchForm.word.value, savedArticles);
+  if (articlesMainPage.length <= 3) {
+    resultsButton.classList.remove('results__button_is-visible');
+    return;
+  }
+  // отрезаем, что отрисовали и возвращаем обновленный массив
+  return articlesMainPage.splice(0, 3);
+});
 
 // Регистрация
 popupFormRegistration.addEventListener('submit', (event) => {
@@ -96,11 +171,7 @@ popupFormRegistration.addEventListener('submit', (event) => {
       popupFormRegistration.name.value,
     )
     .then((res) => {
-      console.log(55);
-      console.log(res);
       if (res.message) {
-        console.log(77);
-        console.log(res);
         return Promise.reject(res);
       }
       popupFormRegistration.reset();
@@ -108,8 +179,6 @@ popupFormRegistration.addEventListener('submit', (event) => {
       popupSuccessRegistration.open();
     })
     .catch((err) => {
-      console.log(66);
-      console.log(err);
       popupFormRegistration.querySelector('.popup__error').textContent = err.message;
     });
 });
@@ -123,30 +192,31 @@ popupFormAuthorize.addEventListener('submit', (event) => {
       popupFormAuthorize.password.value,
     )
     .then((res) => {
-      console.log(res.data);
+      if (res.message) {
+        return Promise.reject(res);
+      }
       PROPS.isLoggedIn = true;
-      console.log(777);
       popupFormAuthorize.reset();
       popupAuthorize.close();
       headerRender(res.data, PROPS.isLoggedIn);
+      savedArticles.length = 0; // очистить массив
     })
     .catch((err) => {
-      console.log(888);
+      popupFormAuthorize.querySelector('.popup__error').textContent = err.message;
       console.log(err);
     });
 });
 
 // logout
-headerButtonName.addEventListener('click', () => {
+headerButtonLogout.addEventListener('click', () => {
   mainApi
     .logout()
     .then((res) => {
-      console.log(res);
       PROPS.isLoggedIn = false;
       headerRenderLogout();
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.message);
     });
 });
 
@@ -154,26 +224,14 @@ headerButtonName.addEventListener('click', () => {
 articlesList.addEventListener('click', (event) => {
   // Если клик по бесцветному флажку:
   if (event.target.classList.contains('article-card__like-icon')) {
-    // const cardId = event.target.closest('.place-card').getAttribute('cardID');
+    const articleData = article.getTextContentArticle(event);
     mainApi
-      .postArticle(
-        event.target
-          .closest('.article-card')
-          .getAttribute('keyword'),
-        event.target.closest('.article-card').querySelector('.article-card__title').textContent,
-        event.target.closest('.article-card').querySelector('.article-card__text').textContent,
-        event.target.closest('.article-card').querySelector('.article-card__date').textContent,
-        event.target.closest('.article-card').querySelector('.article-card__source').textContent,
-        event.target.closest('.article-card').getAttribute('src'),
-        event.target.closest('.article-card').querySelector('.article-card__image').style.backgroundImage.slice(5, -2),
-      )
+      .postArticle(articleData)
       .then((data) => {
-        console.log(data);
         article.like(event);
       })
       .catch((err) => {
-        console.log(66);
-        console.log(err);
+        alert(err.message);
       });
     // Если клик по синему флажку:
   } else if (event.target.classList.contains('article-card__delete-icon')) {
@@ -185,28 +243,29 @@ articlesList.addEventListener('click', (event) => {
       })
       .catch((err) => {
         console.log(`Удаление неуспешно: ${err}`);
+        alert(err.message);
       });
     article.like(event);
   }
 });
 
-// функция для проверки авторизованности юзера
-function checkLogged() {
-  mainApi.getUserInfo()
-    .then((res) => {
-      if (res.message) {
-        console.log(1000);
-        console.log(res);
-        return Promise.reject(res);
-      }
-      console.log(5000);
-      console.log(res);
-      PROPS.isLoggedIn = true;
-      console.log(PROPS.isLoggedIn);
-      headerRender(res.name, PROPS.isLoggedIn);
-    })
-    .catch((err) => {
-      console.log(1001);
-      console.log(err.message);
-    });
-}
+// Всплывающая подсказка Войдите, чтобы сохранять статьи
+articlesList.addEventListener('mouseover', (event) => {
+  if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
+    event.target.closest('.article-card')
+      .querySelector('.article-card__hint-container')
+      .classList
+      .add('article-card__hint-container_is-opened');
+  }
+});
+
+// Убрать Всплывающую подсказку Войдите, чтобы сохранять статьи
+articlesList.addEventListener('mouseout', (event) => {
+  if (event.target.classList.contains('article-card__like-icon') && !PROPS.isLoggedIn) {
+    event.target.closest('.article-card')
+      .querySelector('.article-card__hint-container')
+      .classList
+      .remove('article-card__hint-container_is-opened');
+  }
+});
+

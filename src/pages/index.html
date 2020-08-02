@@ -16,16 +16,20 @@
   <div class="root">
     <main class="content">
       <header class="header ">
-        <button class="header__menu-320"></button> <!-- кнопка = -->
-        <!-- На 320 после нажатия header__menu-320 меняется на header__close-320 через toggle -->
+        <button class="header__button-320"></button><!-- кнопка = -->
+        <button class="header__close-320"></button>
+        <!-- На 320 после нажатия header__button-320 появлется header__close-320  -->
         <p class="header__logo">NewsExplorer</p>
 
-        <div class="header__menu">
+        <div class="header__menu header__menu_container-320">
           <a class="header__menu header__menu-main" href="./">Главная</a>
           <a class="header__menu header__menu-articles " href="./articles.html">Сохранённые статьи</a>
           <button class="header__button header__button_authorize">Авторизоваться</button>
-          <button class="header__button header__button_name"><img class="button__exit"
-              src="<%=require('../images/exit1440white.svg').default%>" alt="button__exit"></button>
+          <button class="header__button header__button_logout">
+            <span class="header__user-name"></span>
+            <img class="header__img-logout" src="<%=require('../images/exit1440white.svg').default%>"
+              alt="header__img-logout">
+          </button>
         </div>
       </header>
 
@@ -39,7 +43,7 @@
             <div class="search__input-container">
               <input required type="text" name="word" class="search__input" placeholder="Введите тему новости"
                 minlength="2" maxlength="30" />
-              <span class="input__error"></span>
+              <span class="input__error input__error_search"></span>
             </div>
 
             <button class="search__button">Искать</button>
@@ -49,11 +53,26 @@
 
       <section class="results root__section">
 
-        <h2 class="results__title">Результаты поиска</h2>
-
-        <div class="articles-list root__section">
+        <div class="results__got">
+          <h2 class="results__title">Результаты поиска</h2>
+          <div class="articles-list root__section"> </div>
+          <button class="results__button">Показать еще</button>
         </div>
-        <button class="results__button">Показать еще</button>
+
+        <div class="results__searching">
+          <i class="circle-preloader"></i>
+          <p class="results__searching-text">Мы ищем для вас новости...</p>
+        </div>
+
+        <div class="results__nothing">
+          <p class="results__regret-text">Ничего не найдено</p>
+        </div>
+
+        <div class="results__server-error">
+          <p class="results__regret-text">Во время запроса произошла ошибка. </p>
+          <p class="results__regret-text">Возможно, проблема с соединением или сервер недоступен.</p>
+          <p class="results__regret-text">Подождите немного и попробуйте ещё раз</p>
+        </div>
 
       </section>
 
@@ -80,8 +99,9 @@
           <form class="popup__form popup__form_authorize" name="authorize">
             <div class="input-container">
               <span class="input__name">Email</span>
-              <input required type="text" name="email" class="popup__input popup__input_type_email"
-                placeholder="Введите почту" minlength="2" maxlength="30" />
+              <input required type="email" name="email" class="popup__input popup__input_type_email"
+                placeholder="Введите почту" minlength="2" maxlength="30"
+                pattern="^[a-z]+[-.\w]*@(\w+[\w-]+)+(\.[a-z]{2,3})$" />
               <span class="input__error"></span>
             </div>
             <div class="input-container">
@@ -106,9 +126,10 @@
           <form class="popup__form popup__form_registration" name="registration">
             <div class="input-container">
               <span class="input__name">Email</span>
-              <input required type="text" name="email" class="popup__input popup__input_type_email"
-                placeholder="Введите почту" minlength="2" maxlength="30" />
-              <span class="input__error">Ошибка с сервера</span>
+              <input required type="email" name="email" class="popup__input popup__input_type_email"
+                placeholder="Введите почту" minlength="2" maxlength="30"
+                pattern="^[a-z]+[-.\w]*@(\w+[\w-]+)+(\.[a-z]{2,3})$" />
+              <span class="input__error"></span>
             </div>
             <div class="input-container">
               <span class="input__name">Пароль</span>

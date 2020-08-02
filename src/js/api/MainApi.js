@@ -25,7 +25,7 @@ export default class MainApi {
       .then((res) => this._getResponseData(res));
   }
 
-  postArticle(keyword, title, text, date, source, link, image) {
+  postArticle(articleData) {
     return fetch(`${this.options.baseUrl}/articles`, {
       method: 'POST',
       headers: {
@@ -33,15 +33,7 @@ export default class MainApi {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({
-        keyword,
-        title,
-        text,
-        date,
-        source,
-        link,
-        image,
-      }),
+      body: JSON.stringify(articleData),
     })
       .then((res) => this._getResponseData(res));
   }

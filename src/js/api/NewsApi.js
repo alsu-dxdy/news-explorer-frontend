@@ -4,13 +4,10 @@ export default class NewsApi {
     this.options = options;
   }
 
-  getInitialCards(text) {
+  getArticles(text, startdate, todate) {
     return (
-      fetch(`${this.options.baseUrl}q=${text}`, {
+      fetch(`${this.options.baseUrl}q=${text}&from=${startdate}&to=${todate}`, {
         method: 'GET',
-        // headers: {
-        //   authorization: this.options.headers.authorization,
-        // },
       })
     )
       .then((res) => res.json());

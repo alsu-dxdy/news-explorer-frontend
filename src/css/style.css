@@ -2,8 +2,9 @@
 @import url(../../vendor/normalize.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/search/search.css);
-@import url(../blocks/button/button__exit.css);
+@import url(../blocks/button/header__img-logout.css);
 @import url(../blocks/results/results.css);
+@import url(../blocks/preloader/preloader.css);
 @import url(../blocks/articles-list/articles-list.css);
 @import url(../blocks/article-card/article-card.css);
 @import url(../blocks/author/author.css);
@@ -28,4 +29,8 @@ body {
   /* выше для экранов больше 1600px отцентрировали весь контент */
 }
 
-@media (min-width: 1440px) {}
+@media (max-width: 1024px) {
+  /* section, div, h1, p, form, input, span, button {
+    border: 1px solid red;
+  } */
+}

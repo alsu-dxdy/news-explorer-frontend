@@ -14,6 +14,18 @@
   margin-bottom: 0;
 }
 
+.popup__input:valid:not(:placeholder-shown) {
+  border-color: #ffdb4d;
+}
+
+.popup__input:invalid:not(:placeholder-shown) {
+  border-color: #df4b41;
+}
+
+.popup__input:invalid:not(:placeholder-shown)+.input__error {
+  display: block;
+}
+
 .input-container {
   margin-bottom: 13px;
 }
@@ -33,6 +45,7 @@
 }
 
 .input__error {
+  /* display: none; */
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
@@ -40,4 +53,22 @@
   line-height: 15px;
   color: #FF0000;
   margin-left: 6px;
+}
+
+.input__error_search {
+  margin-bottom: 80px;
+  margin-left: 24px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .input__error_search {
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .input__error_search {
+    margin-bottom: 16px;
+    margin-left: 0;
+  }
 }

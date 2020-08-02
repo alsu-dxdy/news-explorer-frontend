@@ -2,7 +2,7 @@
 @import url(../../vendor/normalize.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/account-info/account-info.css);
-@import url(../blocks/button/button__exit.css);
+@import url(../blocks/button/header__img-logout.css);
 @import url(../blocks/results/results.css);
 @import url(../blocks/articles-list/articles-list.css);
 @import url(../blocks/article-card/article-card.css);
@@ -24,10 +24,6 @@ body {
   border-bottom: 0.5px solid rgba(26, 27, 34, 0.5);
 }
 
-.header__button.header__button_name {
-  display: inline-block;
-}
-
 .header_font-black {
   color: #1A1B22;
 }
@@ -40,10 +36,6 @@ body {
   /* скрыть b-image от главной страницы*/
   background-image: none;
   margin-bottom: 40px;
-}
-
-.header__link.header__link_articles a {
-  color: #1A1B22;
 }
 
 .section-title {

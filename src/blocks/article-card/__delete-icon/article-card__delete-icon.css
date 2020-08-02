@@ -10,6 +10,7 @@
   position: absolute;
   top: 24px;
   right: 24px;
+  z-index: 3;
 }
 
 .article-card__delete-icon:hover {
