@@ -39,6 +39,7 @@ export function renderAccountButton(name) {
 export function renderAccountCount(name, count, word) {
   // имя, у вас 5 сохранённых статей
   document.querySelector('.account-info__title').textContent = `${name}, у вас ${count} сохранённых статей`;
+  document.querySelector('.account-info__keywords').classList.add('is-visible');
   document.querySelector('.account-info__keywords_bold').textContent = `${word}`;
 }
 

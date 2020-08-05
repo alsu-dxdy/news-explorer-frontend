@@ -107,8 +107,8 @@ searchForm.addEventListener('submit', (event) => {
     // запрос Сохраненных статей для залогиненного юзера:
     mainApi.getArticles()
       .then((data) => {
-        console.log(data.message);
-        if (data.message.includes('does not exist')) {
+        // console.log(data);
+        if (data.message) {
           return;
         }
         // сохр-ые статьи для синего флажка у уже сохр-ых статей
