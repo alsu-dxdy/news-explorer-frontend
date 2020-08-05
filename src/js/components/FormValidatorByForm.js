@@ -10,7 +10,7 @@ export default class FormValidatorByForm {
   checkInputValidity(input, error) {
 
     if (input.validity.valueMissing) {
-      return (error.textContent = 'Это обязательное поле');
+      return (error.textContent = 'Нужно ввести ключевое слово');
     }
 
     if (input.validity.tooShort) {
