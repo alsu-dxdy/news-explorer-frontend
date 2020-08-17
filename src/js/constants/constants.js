@@ -19,7 +19,7 @@ const mainApi = new MainApi({
 
 const newsApi = new NewsApi({
   // baseUrl: 'https://newsapi.org/v2/everything?'
-  baseUrl: 'https://praktikum.tk/news/v2/everything?language=ru&'
+  baseUrl: 'https://nomoreparties.co/news/v2/everything?language=ru&'
     + 'apiKey=a3389c152ac04c848350954b53570e25&'
     + 'pageSize=10&',
   headers: {
@@ -69,10 +69,10 @@ let date7daysAgo = new Date(start - 24 * 3600 * 1000 * 7);
 function dateFormat(date) {
   let m = date.getMonth() + 1;
   let d = date.getDate();
-  if (m < 10) {
+  if (m < 9) {
     m = `0${m}`;
   }
-  if (d < 11) {
+  if (d < 10) {
     d = `0${d}`;
   }
   return `${date.getFullYear()}-${m}-${d}`;
