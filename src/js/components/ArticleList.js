@@ -21,23 +21,23 @@ export default class ArticleList {
     }
   }
   // отрисовка статей для залогиненного юзера
-  renderMainPage(newsApiArticles, keyword, likedArticles) {
+  renderMainPage(newsApiArticles, keyword, savedArticles) {
     for (let i = 0; i < newsApiArticles.length; i++) {
       const newCard = this.article.create(
         newsApiArticles[i], keyword,
       );
 
-      // if likedArticles > 0, значит есть Сохр-ные статьи =>
+      // if savedArticles > 0, значит есть Сохр-ные статьи =>
       // для уже Сохр-ных статей закрашивать флажок
-      if (likedArticles.length > 0) {
+      if (savedArticles.length > 0) {
         let isMyLike = false;
         let newsApiArticle = newsApiArticles[i];
 
         // проверяю наличие своего лайка:
         // прохожу по массиву сохр-ных статей
-        for (let i = 0; i < likedArticles.length; i++) {
+        for (let i = 0; i < savedArticles.length; i++) {
           // у каждой сохр-ной статьи сравниваю ссылку со ссылкой "статьи, пришедшей с newsapi"
-          isMyLike = likedArticles.some(function (savedArticle) {
+          isMyLike = savedArticles.some(function (savedArticle) {
             return savedArticle.link === newsApiArticle.url;
           });
         }
