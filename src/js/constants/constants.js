@@ -11,7 +11,8 @@ const PROPS = {
 };
 
 const mainApi = new MainApi({
-  baseUrl: 'https://api.iseeknews.space',
+  //baseUrl: 'https://api.iseeknews.space',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
