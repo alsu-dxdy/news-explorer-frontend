@@ -1,5 +1,5 @@
 # NewsExplorer-frontend
-Frontend Дипломного проекта Яндекс.Практикум
+Frontend Дипломного проекта Яндекс.Практикум. Т.к. реальный сервер в настоящее время остановлен, следует запускать локальную версию сервера по данной [инструкции](https://github.com/alsu-dxdy/news-explorer-api/blob/master/README.md) 
 
 ### Описание проекта:
 Cервис, в котором можно найти новости по запросу и сохранить в личном кабинете.
@@ -31,3 +31,5 @@ npm install
 npm run dev
 ```
 
+### Инструкция по запуску backend
+находится [здесь](https://github.com/alsu-dxdy/news-explorer-api/blob/master/README.md)
